@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"edu","c":"Test018","l":"sum(int, int)","u":"sum(int,int)"},{"p":"edu","c":"Test018","l":"Test018()","u":"%3Cinit%3E()"}];updateSearchResults();

@@ -57,7 +57,7 @@ class Professor extends Person {
 	}
 
 	public String toString() {
-		return super.toString() + "subject: " + subject;
+		return super.toString() + " subject: " + subject;
 	}
 	
 	public void show() {
@@ -76,7 +76,7 @@ class Student extends Person {
 	}
 
 	public String toString() {
-		return super.toString() + "major: " + major;
+		return super.toString() + " major: " + major;
 	}
 
 	public void show() {
@@ -112,8 +112,10 @@ public class ProcessPersons {
 //		System.out.println(p2);
 		
 		Professor pf = new Professor("¹ÚÃ¶¼ö",38,"¼±Çü´ë¼ö");
+		System.out.println(pf.toString());
 		
 		Student s = new Student("±è¿µÈñ",26,"¼öÇÐ");
+		System.out.println(s.toString());
 		
 		Person list[] = new Person[5];
 		
