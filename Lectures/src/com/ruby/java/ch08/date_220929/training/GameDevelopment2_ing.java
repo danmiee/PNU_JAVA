@@ -5,7 +5,7 @@ package com.ruby.java.ch08.date_220929.training;
  * 일반클래스 > 추상클래스 > 인터페이스
  */
 
-public class GameDevelopment2 {
+public class GameDevelopment2_ing {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
