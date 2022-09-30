@@ -44,8 +44,29 @@ public class DrinksMain {
 
 		// Collection (ArrayList)
 
+			/*
+			 *  자바 배열의 특징 : 사이즈를 변경할 수 없다.
+			 *  변경하려면 새로운 배열을 만들어서 기존 데이터를 옮겨야함
+			 *  그 한계를 극복하게 해주는 것이 ArrayList
+			 *  내부 로직은 자료구조에서 공부
+			 */
 		{
 			List<Drinks> list = new ArrayList<>();
+			/*
+			 *  ArrayList는 배열의 구조를 가지고 있기 때문에 데이터타입 지정해줘야함
+			 *  여기서 데이터타입은 List<Drinks>
+			 *  형태는 암기
+			 *  임의의 데이터 타입을 지정할 수 있게 하기 위해 정해둔 문법
+			 *  
+			 *  <다형성 개념>
+			 *  List는 ArrayList의 인터페이스로
+			 *  List가 ArrayList를 받을 수 있음
+			 *  
+			 *  ArrayList 부분만 Vector로 바꿔주면 심플하게 유지보수 가능
+			 *  
+			 *  >> 하나의 인터페이스 안에 있는 구현체들은 교체하기 쉽다.
+			 *  단, 인터페이스 자체가 변경되는 경우 코드를 새로 짜야한다.
+			 */
 			
 			list.add(new Juice("오렌지 쥬스", 3500));
 			list.add(new Coffee("아이스 아메리카노", 2000));
