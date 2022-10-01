@@ -33,21 +33,21 @@ public class GameDevelopment {
 
 class Unit {
 	// 생성자 선언
-	public Unit(String o, String a) {
-		this.object = o;
-		this.action = a;
+	public Unit(String str, String action) {
+		this.str = str;
+		this.action = action;
 	}
 	private String action;
-	private String object;
+	private String str;
 	// 출력문
 	public void show() {
-		System.out.println(object+"을(를) "+action);
+		System.out.println(str+"을(를) "+action);
 	}
 }
 // 포를 쏜다
 class Tank extends Unit {
-	public Tank(String o, String a) {
-		super(o,a);
+	public Tank(String str, String action) {
+		super(str,action);
 	}
 	public void show() {
 		super.show();
@@ -55,8 +55,8 @@ class Tank extends Unit {
 }
 // 미사일을 발사한다
 class Airplane extends Unit {
-	public Airplane(String o, String a) {
-		super(o,a);
+	public Airplane(String str, String action) {
+		super(str,action);
 	}
 	public void show() {
 		super.show();
@@ -65,8 +65,8 @@ class Airplane extends Unit {
 }
 // 어뢰를 쏜다
 class Submarine extends Unit {
-	public Submarine (String o, String a) {
-		super(o,a);
+	public Submarine (String str, String action) {
+		super(str,action);
 	}
 	public void show() {
 		super.show();
@@ -75,8 +75,8 @@ class Submarine extends Unit {
 }
 // 총을 쏜다
 class Soldier extends Unit {
-	public Soldier (String o, String a) {
-		super(o,a);
+	public Soldier (String str, String action) {
+		super(str,action);
 	}
 	public void show() {
 		super.show();
