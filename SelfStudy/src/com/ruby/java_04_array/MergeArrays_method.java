@@ -14,13 +14,13 @@ class Getmerge {
 		int[] B = new int[n];
 
 		for (int i = 0; i < A.length; i++) {
-			A[i] = (int) (Math.random() * 10);
+			A[i] = (int) (Math.floor(Math.random() * 100)+1);
 		}
 		/*
 		 * Math.random : 실수형 랜덤숫자 반환 원하는 자리수만큼 곱한 뒤 int형으로 변환함으로써 소수점단위 자동 절삭
 		 */
 		for (int j = 0; j < B.length; j++) {
-			B[j] = (int) (Math.random() * 10);
+			B[j] = (int) (Math.floor(Math.random() * 100)+1);
 		}
 		
 //		0&짝수 인덱스는 A값, 홀수 인덱스는 B값 불러오기
@@ -49,7 +49,7 @@ public class MergeArrays_method {
 
 		int n;
 		
-		System.out.println("배열의 크기를 입력하면 2개의 랜덤 배열과 두 배열의 머지값을 출력합니다.");
+		System.out.println("배열의 크기를 입력하면 정수(1~100)로 이루어진 2개의 랜덤배열과 두 배열의 머지값을 출력합니다.");
 		System.out.println("확인이 끝나면 0을 눌러주세요.");
 		
 		while((n= sc.nextInt())!=0) {
