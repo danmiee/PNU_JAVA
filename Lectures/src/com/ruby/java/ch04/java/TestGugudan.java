@@ -1,4 +1,4 @@
-package training.java;
+package com.ruby.java.ch04.java;
 
 public class TestGugudan {
 
