@@ -1,4 +1,4 @@
-package com.ruby.java_07_hongsubject;
+package com.ruby.java_07_inheritance;
 
 /*
  * 교재를 참고하여 Person, Employee, Professor, Student 클래스 생성
