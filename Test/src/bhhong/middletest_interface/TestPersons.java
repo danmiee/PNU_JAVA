@@ -24,14 +24,14 @@ class Employee extends Person implements Message {
 	private String job;
 	private String dept;
 	private int salary;
-	private String msg;
+	private String gender;
 
-	public Employee(String pnum, String name, int age, String job, String dept, int salary, String msg) {
+	public Employee(String pnum, String name, int age, String job, String dept, int salary, String gender) {
 		super(pnum, name, age);
 		this.job = job;
 		this.dept = dept;
 		this.salary = salary;
-		this.msg = msg;
+		this.gender = gender;
 	}
 
 	public String toString() {
@@ -47,19 +47,19 @@ class Employee extends Person implements Message {
 	@Override
 	void increase() {
 		// TODO Auto-generated method stub
-		salary = (int) (salary + (salary * 0.1));
+		salary = (int) (salary * 1.1);
 	}
 
 	@Override
 	public String getMessage() {
 		// TODO Auto-generated method stub
-		return " msg: ";
+		return gender;
 	}
 
 	@Override
-	public String setMessage() {
+	public void setMessage(String gender) {
 		// TODO Auto-generated method stub
-		return msg;
+		System.out.println("gender: "+gender);
 	}
 
 }
@@ -68,9 +68,9 @@ class Designer extends Employee {
 	private String language;
 	private int workYear;
 
-	public Designer(String pnum, String name, int age, String job, String dept, int salary, String msg, String language,
+	public Designer(String pnum, String name, int age, String job, String dept, int salary, String gender, String language,
 			int workYear) {
-		super(pnum, name, age, job, dept, salary, msg);
+		super(pnum, name, age, job, dept, salary, gender);
 		this.language = language;
 		this.workYear = workYear;
 	}
@@ -81,21 +81,23 @@ class Designer extends Employee {
 
 	void show() {
 		System.out.println(toString());
-		// Employee 객체의 show를 ㄹ부르고 자신 객체에 대한 show 함수를 호출
+		// Employee 객체의 show를 부르고 자신 객체에 대한 show 함수를 호출
 	}
 }
 
-class Student extends Person {
+class Student extends Person implements Message{
 
 	private String schoolName;
 	private int schoolyear;
 	private int scholarship;
+	private String gender;
 
-	public Student(String pnum, String name, int age, String schoolName, int schoolyear, int scholarship) {
+	public Student(String pnum, String name, int age, String schoolName, int schoolyear, int scholarship, String gender) {
 		super(pnum, name, age);
 		this.schoolName = schoolName;
 		this.schoolyear = schoolyear;
 		this.scholarship = scholarship;
+		this.gender = gender;
 	}
 
 	public String toString() {
@@ -112,7 +114,19 @@ class Student extends Person {
 	@Override
 	void increase() {
 		// TODO Auto-generated method stub
-		scholarship = (int) (scholarship + (scholarship * 0.1));
+		scholarship = (int) (scholarship * 1.1);
+	}
+
+	@Override
+	public String getMessage() {
+		// TODO Auto-generated method stub
+		return gender;
+	}
+
+	@Override
+	public void setMessage(String gender) {
+		// TODO Auto-generated method stub
+		System.out.println("gender: " + gender);
 	}
 }
 
@@ -120,9 +134,9 @@ class WorkStudent extends Student {
 	private String Job;
 	private int dayPay;
 
-	public WorkStudent(String pnum, String name, int age, String schoolName, int schoolyear, int scholarship,
+	public WorkStudent(String pnum, String name, int age, String schoolName, int schoolyear, int scholarship, String gender,
 			String Job, int dayPay) {
-		super(pnum, name, age, schoolName, schoolyear, scholarship);
+		super(pnum, name, age, schoolName, schoolyear, scholarship, gender);
 		this.Job = Job;
 		this.dayPay = dayPay;
 	}
@@ -136,19 +150,19 @@ class WorkStudent extends Student {
 	}
 
 	void increase() {
-		dayPay = (int) (dayPay + (dayPay * 0.1));
+		dayPay = (int) (dayPay * 1.1);
 	}
 
 	
 }
 
-public class TestPersons_ing {
+public class TestPersons {
 
 	static void getData(Person[] p) {
-		Employee e = new Employee("p01", "Hong", 10, "DB", "Design", 2000, "사원");
-		Designer d = new Designer("p02", "Kim", 30, "A", "A2", 3000, "대리", "en", 3);
-		Student s = new Student("p03", "Lee", 20, "PNU", 3, 200);
-		WorkStudent w = new WorkStudent("p04", "Park", 25, "KSU", 3, 100, "PA", 10);
+		Employee e = new Employee("p01", "Hong", 10, "DB", "Design", 2000, "F");
+		Designer d = new Designer("p02", "Kim", 30, "A", "A2", 3000, "M", "en", 3);
+		Student s = new Student("p03", "Lee", 20, "PNU", 3, 200, "F");
+		WorkStudent w = new WorkStudent("p04", "Park", 25, "KSU", 3, 100, "M", "PA", 10);
 		p[0] = e;
 		p[1] = d;
 		p[2] = s;
@@ -168,30 +182,45 @@ public class TestPersons_ing {
 	}
 
 	static void getMessageData(Message[] m) {
-		Employee e = new Employee("p01", "Hong", 10, "DB", "Design", 2000, "사원");
-		Designer d = new Designer("p02", "Kim", 30, "A", "A2", 3000, "대리", "en", 3);
+		Employee e = new Employee("p01", "Hong", 10, "DB", "Design", 2000, "F");
+		Designer d = new Designer("p02", "Kim", 30, "A", "A2", 3000, "M", "en", 3);
+		Student s = new Student("p03", "Lee", 20, "PNU", 3, 200, "F");
+		WorkStudent w = new WorkStudent("p04", "Park", 25, "KSU", 3, 100, "M", "PA", 10);
+		
 		m[0] = e;
 		m[1] = d;
+		m[2] = s;
+		m[3] = w;
 	}
 	
-	static void messageShowAll(Message[] m) {
-		for (int k = 0; k < m.length; k++) {
-			m[k].getMessage();
-			m[k].setMessage();
+	static void messageShowAll(Message [] m) {
+		for (int k = 0; k < m.length; k++) {			
+			m[k].setMessage(m[k].getMessage());
 		}
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		Person[] setPerson = new Person[4];
-		getData(setPerson);
-		showAll(setPerson);
-		increaseAll(setPerson);
-		showAll(setPerson);
 		
-		Message[] setMessage = new Message[0];
-		messageShowAll(setMessage);
+		try {
+			Person[] setPerson = new Person[4];
+			getData(setPerson);
+			showAll(setPerson);
+			
+			System.out.println();
+			
+			increaseAll(setPerson);
+			showAll(setPerson);
+			
+			System.out.println();
+			
+			Message[] setMessageData = new Message[4];
+			getMessageData(setMessageData);		// get이 누락되면 가져올 수 있는 값이 없어서 null 에러 발생
+			messageShowAll(setMessageData);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 
