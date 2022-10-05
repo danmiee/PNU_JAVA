@@ -172,6 +172,8 @@ public class TestPersons {
 	static void showAll(Person[] p) {
 		for (int i = 0; i < p.length; i++) {
 			p[i].show();
+//			System.out.println(p[i].getMessage());
+			// 추상클래스의 메소드는 호출할 수 있으나 인터페이스의 메소드는 호출할 수 없다.
 		}
 	}
 
@@ -196,6 +198,9 @@ public class TestPersons {
 	static void messageShowAll(Message [] m) {
 		for (int k = 0; k < m.length; k++) {			
 			m[k].setMessage(m[k].getMessage());
+			System.out.println(m[k].getMessage());
+//			m[k].show();
+			// 인터페이스의 메소드는 호출할 수 있으나 추상클래스의 메소드는 호출할 수 없다.
 		}
 	}
 
