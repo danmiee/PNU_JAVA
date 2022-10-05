@@ -89,7 +89,7 @@ class Student extends Person implements Message{
 
 	private String schoolName;
 	private int schoolyear;
-	private int scholarship;
+	protected int scholarship;
 	private String gender;
 
 	public Student(String pnum, String name, int age, String schoolName, int schoolyear, int scholarship, String gender) {
@@ -101,7 +101,7 @@ class Student extends Person implements Message{
 	}
 
 	public String toString() {
-		return super.toString() + " schoolName: " + schoolName + " schoolyearr: " + schoolyear + " scholarship: "
+		return super.toString() + " schoolName: " + schoolName + " schoolyear: " + schoolyear + " scholarship: "
 				+ scholarship;
 	}
 
@@ -150,6 +150,7 @@ class WorkStudent extends Student {
 	}
 
 	void increase() {
+		scholarship = (int) (scholarship * 1.1);
 		dayPay = (int) (dayPay * 1.1);
 	}
 
