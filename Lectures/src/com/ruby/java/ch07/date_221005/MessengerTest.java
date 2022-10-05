@@ -2,10 +2,15 @@ package com.ruby.java.ch07.date_221005;
 
 public class MessengerTest {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		IPhoneMessenger iphone = new IPhoneMessenger();
 		GalaxyMessenger galaxy = new GalaxyMessenger();
+		
+		// p347 다형성
+		Messenger iphone2 = new IPhoneMessenger();
+		Messenger galaxy2 = new GalaxyMessenger();
 		
 		System.out.println(("메신저 최소 문자 크기" + Messenger.MIN_SIZE));
 		System.out.println(("메신저 최대 문자 크기" + Messenger.MAX_SIZE));
