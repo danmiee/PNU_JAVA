@@ -1,26 +1,45 @@
 package baekjoon.step04.Array_1D;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class q03_Remainder_ing {
 
-	@SuppressWarnings("resource")
+	@SuppressWarnings({ "resource", "unused" })
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		int N1[] = new int[10];
-		int N2[] = new int[10];
-		int count = 0;
+//		int N[] = new int[10];
+		int N[] = {39,40,41,42,43,44,82,83,84,85};
+		int rN[] = new int[10];
+		int temp[] = new int[10];
+		int cnt=0;
 		
-		for(int i=0; i<N1.length; i++) {
-			N1[i]=sc.nextInt();
-			N2[i]=N1[i]%42;
+		for(int i=0; i<N.length; i++) {
+//			N[i]=sc.nextInt();
+			rN[i]=N[i]%42;
 		}
-
-		// 배열요소 중복값 제거하고 길이구하기 
+		System.out.println(Arrays.toString(rN));
 		
-		System.out.println(count);
+		for(int i=0; i<rN.length; i++) {
+			boolean flag = false;
+			for(int j=0; j<temp.length; j++) {
+				if(rN[i]==temp[j]) {
+					flag = true;
+					System.out.println(Arrays.toString(temp));
+				}
+			}
+			if(!flag) {
+				// ?????
+				temp[cnt++] = rN[i];
+			}
+		}
 		
+//		for(int i=0; i<cntrN.length; i++) {
+//			cnt += cntrN[i];
+//		}
+//		System.out.println(Arrays.toString(cntrN));
+//		System.out.println(cnt);
 	}
 }
