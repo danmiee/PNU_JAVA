@@ -10,6 +10,7 @@ public class MessengerTest {
  *  - 익명클래스는 인스턴스 생성과 동시에 선언
  */
 		Messenger test = new Messenger() {
+			// 인터페이스에 대한 클래스(이름없음)를 만들고 객체(test)도 함께 생성
 			
 			@Override
 			public void setMessage(String msg) {

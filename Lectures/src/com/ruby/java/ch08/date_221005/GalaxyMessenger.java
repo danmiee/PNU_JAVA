@@ -1,6 +1,7 @@
 package com.ruby.java.ch08.date_221005;
 
 public class GalaxyMessenger implements Messenger {
+	// 인터페이스는 함수이름만 있으므로 함수바디를 구현한 클래스를 만듦
 
 	@Override
 	public String getMessage() {
