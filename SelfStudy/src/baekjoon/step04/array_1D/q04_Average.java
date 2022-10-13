@@ -1,4 +1,4 @@
-package baekjoon.step04.Array_1D;
+package baekjoon.step04.array_1D;
 
 import java.util.Arrays;
 import java.util.Scanner;

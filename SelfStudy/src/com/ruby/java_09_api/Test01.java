@@ -1,4 +1,4 @@
-package com.ruby.java_09_API;
+package com.ruby.java_09_api;
 
 public class Test01 {
 
