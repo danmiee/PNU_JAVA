@@ -2,8 +2,7 @@ package baekjoon.step06.string;
 
 import java.util.Scanner;
 
-public class q03_FindAlphabet {
-
+class Check {
 	// 알파벳별 단어 내 위치 확인(없으면 -1)
 	public static void show(String str) {
 		char[] abc = {'a','b','c','d','e','f','g','h',
@@ -12,8 +11,11 @@ public class q03_FindAlphabet {
 		for(char c : abc) {
 			System.out.print(str.indexOf(c)+" ");
 		}
-	}
-	
+	}	
+}
+
+public class q03_FindAlphabet {
+
 	public static void main(String[] args) {
 		
 		// 소문자로 이루어진 단어 입력받기(str)
@@ -21,6 +23,8 @@ public class q03_FindAlphabet {
 		
 		String str = sc.next();
 		
-		show(str);
+		Check.show(str);
+		
+		sc.close();
 	}
 }
