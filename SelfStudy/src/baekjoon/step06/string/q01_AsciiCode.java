@@ -2,7 +2,7 @@ package baekjoon.step06.string;
 
 import java.util.Scanner;
 
-public class AsciiCode {
+public class q01_AsciiCode {
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {

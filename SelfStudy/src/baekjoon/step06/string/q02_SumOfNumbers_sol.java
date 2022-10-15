@@ -2,7 +2,7 @@ package baekjoon.step06.string;
 
 import java.util.Scanner;
 
-public class SumOfNumbers_sol {
+public class q02_SumOfNumbers_sol {
 
 	public static void main(String[] args) {
 		

@@ -3,7 +3,7 @@ package baekjoon.step06.string;
 import java.math.BigInteger;
 import java.util.Scanner;
 
-public class SumOfNumbers {
+public class q02_SumOfNumbers {
 
 	public static void main(String[] args) {
 		

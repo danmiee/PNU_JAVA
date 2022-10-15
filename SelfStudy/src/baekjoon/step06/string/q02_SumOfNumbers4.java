@@ -2,9 +2,9 @@ package baekjoon.step06.string;
 
 import java.util.Scanner;
 
-class SNsub {
+class SNsub2 {
 	// num3s 생성 : 입력받은 num2를 num1개만큼 자르기
-	public String getNum2(int num1, long num2) {
+	public static String getNum2(int num1, long num2) {
 		String num2s = String.valueOf(num2);
 		String num3s = "";
 		if(num2s.length()<num1) {
@@ -14,7 +14,7 @@ class SNsub {
 		}
 		return num3s;
 	}
-	public void print(String num3s) {
+	public static void print(String num3s) {
 		int sum = 0;
 		for(int i=0; i<num3s.length(); i++) {
 			sum += Integer.parseInt(num3s.substring(i, i+1));
@@ -23,7 +23,7 @@ class SNsub {
 	}
 }
 
-public class SumOfNumbers3 {
+public class q02_SumOfNumbers4 {
 	
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
@@ -33,8 +33,8 @@ public class SumOfNumbers3 {
 		int num1 = sc.nextInt();
 		long num2 = sc.nextLong();
 
-		SNsub sb = new SNsub();
-		String str = sb.getNum2(num1, num2);
-		sb.print(str);
+		String str = SNsub2.getNum2(num1, num2);
+		SNsub2.print(str);
+		// static으로 선언된 경우 클래스명을 객체로 메소드 바로 호출
 	}
 }
