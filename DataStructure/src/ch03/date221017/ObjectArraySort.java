@@ -146,17 +146,24 @@ public class ObjectArraySort {
 		Fruit obj2 = iter2.next();
 		
 		while(iter1.hasNext() && iter2.hasNext()) {
-			
-			if(obj1.getPrice()>obj2.getPrice()) {
+			if(obj1.getPrice()<obj2.getPrice()) {
+				list3.add(obj1);
+				obj1 = iter1.next();
+			} else if(obj1.getPrice()>obj2.getPrice()) {
 				list3.add(obj2);
 				obj2 = iter2.next();
-			} else if(obj1.getPrice()<obj2.getPrice()) {
-				list3.add(obj1);
-				obj1 = iter1.next();
 			} else {
+				if(obj1.getName().compareTo(obj2.getName())<0) {
+					list3.add(obj1);
+					obj1 = iter1.next();
+				} else if(obj1.getName().compareTo(obj2.getName())>0) {
+					list3.add(obj2);
+					obj2 = iter2.next();
+				} else {
 				list3.add(obj1);
 				obj1 = iter1.next();
 				obj2 = iter2.next();
+				}
 			}
 		}
 		
@@ -170,10 +177,16 @@ public class ObjectArraySort {
 			obj2 = iter2.next();
 		}
 
-	    System.out.println("merge:: ");
+		if(iter1.hasNext()==false) {
+			list3.add(obj1);
+		}
+		if(iter2.hasNext()==false) {
+			list3.add(obj2);
+		}
+
+		System.out.println("merge:: ");
 	    for ( Fruit city: list3)
 	    	System.out.println(city);
-	    
 	    
 	    Fruit newFruit = new Fruit("참외", 100);
 		// binary search - Comparator를 사용한 구현
@@ -197,7 +210,7 @@ public class ObjectArraySort {
 			}
 		};
 
-	    System.out.println();
+		System.out.println();
 	    if (Collections.binarySearch(list3, newFruit, cc) < 0)
 			System.out.println("조회결과 없다");
 	    else System.out.println("조회 결과 "+ newFruit);
