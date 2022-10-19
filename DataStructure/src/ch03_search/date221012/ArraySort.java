@@ -1,4 +1,4 @@
-package ch01.date221012;
+package ch03_search.date221012;
 
 import java.util.ArrayList;
 import java.util.Arrays;

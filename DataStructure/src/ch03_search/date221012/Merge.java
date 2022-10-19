@@ -1,11 +1,10 @@
-package ch01.date221014;
+package ch03_search.date221012;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class MergeList_iterator {
-
+public class Merge {
 	public static void main(String[] args) {
 		ArrayList<String> list1 = new ArrayList<String>();
 		list1.add("서울");
@@ -14,7 +13,6 @@ public class MergeList_iterator {
 		list1.add("서울");
 		list1.add("도쿄");
 		list1.add("뉴욕");
-		list1.add("서울");
 
 		ArrayList<String> list2 = new ArrayList<String>();
 		list2.add("런던");
@@ -24,75 +22,45 @@ public class MergeList_iterator {
 		list2.add("도쿄");
 		list2.add("서울");
 		list2.add(1, "LA");
-		list2.add("서울");
-		list2.add("서울");
-		list2.add("부산");
-		list2.add("한라산");
 
-		// 정렬
+		// 정렬 sorting 실습
 		System.out.println("collection.sort()::");
-
+		
 		System.out.println("list1::");
 		Collections.sort(list1);
 		for (String city : list1)
 			System.out.print(city + " ");
-
 		System.out.println();
+		
 		System.out.println("list2::");
 		Collections.sort(list2);
 		for (String city : list2)
 			System.out.print(city + " ");
 
-		// ArrayList로 merge하기
+		// list1과 list2를 합쳐서 정렬한 list3 만들기
 		ArrayList<String> list3 = new ArrayList<String>();
 
+		// iter1.next : 다음 요소 가져오기
+		// iter1.hasNext() : 다음 요소 있으면 1, 없으면 0
 		Iterator<String> iter1 = list1.iterator();
 		Iterator<String> iter2 = list2.iterator();
-
-		// merge 구현 부분
+		
+		// Iterator 실습
+		while(iter1.hasNext()) {
+            String obj = (String)iter1.next();
+            list3.add(obj);
+        }
+		while(iter2.hasNext()) {
+            String obj = (String)iter2.next();
+            list3.add(obj);
+        }
+		Collections.sort(list3);
+		// 정렬되어있는 것을 가져와서 다시 정렬 > 성능저하 > 중복제거 및 한번에 처리 필요
+		
 		System.out.println();
 		System.out.println("merge:: ");
-
-		String str1 = iter1.next();
-		String str2 = iter2.next();
-
-		while (iter1.hasNext() && iter2.hasNext()) {
-
-			if (str1.compareTo(str2) > 0) {
-				list3.add(str2);
-				str2 = iter2.next();
-			} else if (str1.compareTo(str2) < 0) {
-				list3.add(str1);
-				str1 = iter1.next();
-			} else {
-				list3.add(str1);
-				str1 = iter1.next();
-				str2 = iter2.next();
-			}
-		}
-
-		while (iter1.hasNext()) {
-			list3.add(iter1.next());
-		}
-
-		while (iter2.hasNext()) {
-			list3.add(iter2.next());
-		}
-
-		Collections.sort(list3);
-
-		// 중복제거
-		for (int i = 0; i < list3.size(); i++) {
-			for (int j = i + 1; j < list3.size(); j++) {
-				if (list3.get(i).equals(list3.get(j))) {
-					list3.remove(j);
-				}
-			}
-		}
-
 		for (String city : list3)
 			System.out.print(city + " ");
 
 	}
-
 }
