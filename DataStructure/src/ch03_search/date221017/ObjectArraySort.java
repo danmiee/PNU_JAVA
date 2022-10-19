@@ -110,19 +110,22 @@ public class ObjectArraySort {
 			@Override
 			public int compare(Fruit o1, Fruit o2) {
 				// TODO Auto-generated method stub
-				if(o1.getPrice()>o2.getPrice()) {
-					return 1;
-				} else if(o1.getPrice()<o2.getPrice()) {
-					return -1;
-				} else {
-					if(o1.getName().compareTo(o2.getName())>0) {
-						return 1;
-					} else if(o1.getName().compareTo(o2.getName())<0) {
-						return -1;
-					} else {
-					return 0;
-					}
-				}
+				return o1.compareTo(o2);
+				
+				// class Fruit에서 Override 완료
+//				if(o1.getPrice()>o2.getPrice()) {
+//					return 1;
+//				} else if(o1.getPrice()<o2.getPrice()) {
+//					return -1;
+//				} else {
+//					if(o1.getName().compareTo(o2.getName())>0) {
+//						return 1;
+//					} else if(o1.getName().compareTo(o2.getName())<0) {
+//						return -1;
+//					} else {
+//					return 0;
+//					}
+//				}
 			}
 	    };
 	    
@@ -185,7 +188,7 @@ public class ObjectArraySort {
 		}
 
 		System.out.println("merge:: ");
-	    for ( Fruit city: list3)
+	    for ( Fruit city: list3 )
 	    	System.out.println(city);
 	    
 	    Fruit newFruit = new Fruit("참외", 100);
@@ -196,24 +199,33 @@ public class ObjectArraySort {
 			@Override
 			public int compare(Fruit o1, Fruit o2) {
 				// TODO Auto-generated method stub
-				if(o1.getPrice()>o2.getPrice()) {
-					return 1;
-				} else if(o1.getPrice()<o2.getPrice()) {
-					return -1;
-				} else {
-					if(o1.getName().equals(o2.getName())) {
-						return 0;
-					} else {
-						return -1;
-					}
-				}
+				return o1.compareTo(o2);
+				
+				// class Fruit에서 Override 완료
+//				if(o1.getPrice()>o2.getPrice()) {
+//					return 1;
+//				} else if(o1.getPrice()<o2.getPrice()) {
+//					return -1;
+//				} else {
+//					if(o1.getName().equals(o2.getName())) {
+//						return 0;
+//					} else {
+//						return -1;
+//					}
+//				}
 			}
 		};
 
 		System.out.println();
-	    if (Collections.binarySearch(list3, newFruit, cc) < 0)
-			System.out.println("조회결과 없다");
-	    else System.out.println("조회 결과 "+ newFruit);
+		System.out.println(Collections.binarySearch(list3, newFruit, cc));
+	    if (Collections.binarySearch(list3, newFruit, cc) >= 0)
+	    	/* binarySearch(a, key, comparator)
+	    	 * a : 검색 범위
+	    	 * key : 검색 대상
+	    	 * comparator : 검색 조건
+	    	 */
+	    System.out.println("조회 결과 "+ newFruit);
+	    else System.out.println("조회결과 없다");
 
 	}
 
