@@ -29,9 +29,7 @@ public class Stack<T> {
 
 	// 스택에 x를 push
 	public void push(T x) {
-		if (top > capacity) {
-			System.out.println("스택이 가득차있습니다.");
-		} else {
+		if (top < capacity) {
 			++top;
 			// list 사이즈 확장
 			data.add(x);
@@ -46,24 +44,17 @@ public class Stack<T> {
 	// 스택에서 데이터를 pop(정상에 있는 데이터를 꺼냄)
 	public T pop() {
 		// pop하는 값을 출력해주기 위해 return 사용
-		if (top == 0) {
-			System.out.println("스택이 비어있습니다.");
-			return null;
-		} else {
-			--top;
-			data.remove(top);
-			return data.get(top);
+		T temp = null;
+		if (top != 0) {
+			temp = data.get(top - 1);
+			data.remove(--top);
 		}
+		return temp;
 	}
 
 	// 스택에서 데이터를 peek(정상에 있는 데이터를 들여다봄)
 	public T peek() {
-		if (top == 0) {
-			System.out.println("스택이 비어있습니다.");
-			return null;
-		} else {
-			return data.get(top - 1);
-		}
+		return data.get(top - 1);
 		// top은 list.size와 같음 > index = top-1
 		// peek하는 값을 출력해주기 위해 return 사용
 	}
