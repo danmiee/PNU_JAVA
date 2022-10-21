@@ -61,6 +61,9 @@ public class Stack<T> {
 
 	// 스택을 비움
 	public void clear() {
+		for(int i=0; i<data.size(); i++) {
+			data.remove(i);
+		}
 		top = 0;
 		/*
 		 * 스택의 요소값은 스택 포인터를 기준으로 처리되므로 스택 포인터를 0으로 주면 모두 삭제됨
