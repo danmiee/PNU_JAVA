@@ -1,53 +1,13 @@
 package ch03_search.date221017;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import ch03_search.Fruit;
 
-class Fruit implements Comparable<Fruit>{
-
-	private String name;
-	private int price;
-
-	public Fruit() {
-	}
-
-	Fruit(String name, int price) {
-		this.name = name;
-		this.price = price;
-	}
-
-	public String toString() {
-		return "(" + "name= " + name + ", " + "price= " + price + ")";
-	}
-	public String getName() {
-		return name;
-	}
-	
-	public int getPrice() {
-		return price;
-	}
-
-	@Override
-	public int compareTo(Fruit o) {
-		// TODO Auto-generated method stub
-		if(this.price > o.price) {
-			return 1;
-		} else if(this.price< o.price) {
-			return -1;
-		} else {
-			if(this.name.compareTo(o.name)>0) {
-				return 1;
-			} else if(this.name.compareTo(o.name)<0) {
-				return -1;
-			} else {
-				return 0;
-			}
-		}
-	}
-}
+// comparable : 자기자신과 매개변수 객체를 비교, import 불필요
+// comparator : 두 매개변수 객체를 비교, import 필요
 
 public class ObjectArraySort {
 	public static void main(String[] args) {
@@ -109,23 +69,8 @@ public class ObjectArraySort {
 
 			@Override
 			public int compare(Fruit o1, Fruit o2) {
-				// TODO Auto-generated method stub
-				return o1.compareTo(o2);
-				
 				// class Fruit에서 Override 완료
-//				if(o1.getPrice()>o2.getPrice()) {
-//					return 1;
-//				} else if(o1.getPrice()<o2.getPrice()) {
-//					return -1;
-//				} else {
-//					if(o1.getName().compareTo(o2.getName())>0) {
-//						return 1;
-//					} else if(o1.getName().compareTo(o2.getName())<0) {
-//						return -1;
-//					} else {
-//					return 0;
-//					}
-//				}
+				return o1.compareTo(o2);
 			}
 	    };
 	    
@@ -149,43 +94,34 @@ public class ObjectArraySort {
 		Fruit obj2 = iter2.next();
 		
 		while(iter1.hasNext() && iter2.hasNext()) {
-			if(obj1.getPrice()<obj2.getPrice()) {
+			if(obj1.compareTo(obj2)<0) {
 				list3.add(obj1);
 				obj1 = iter1.next();
-			} else if(obj1.getPrice()>obj2.getPrice()) {
+			} else if(obj1.compareTo(obj2)>0) {
 				list3.add(obj2);
 				obj2 = iter2.next();
 			} else {
-				if(obj1.getName().compareTo(obj2.getName())<0) {
-					list3.add(obj1);
-					obj1 = iter1.next();
-				} else if(obj1.getName().compareTo(obj2.getName())>0) {
-					list3.add(obj2);
-					obj2 = iter2.next();
-				} else {
 				list3.add(obj1);
 				obj1 = iter1.next();
 				obj2 = iter2.next();
-				}
 			}
 		}
-		
 		while(iter1.hasNext()) {
 			list3.add(obj1);
 			obj1 = iter1.next();
 		}
-
 		while(iter2.hasNext()) {
 			list3.add(obj2);
 			obj2 = iter2.next();
 		}
-
-		if(iter1.hasNext()==false) {
+		if(!iter1.hasNext()) {
 			list3.add(obj1);
 		}
-		if(iter2.hasNext()==false) {
+		if(!iter2.hasNext()) {
 			list3.add(obj2);
 		}
+		
+		Collections.sort(list3);
 
 		System.out.println("merge:: ");
 	    for ( Fruit city: list3 )
@@ -195,36 +131,21 @@ public class ObjectArraySort {
 		// binary search - Comparator를 사용한 구현
 	    
 	    Comparator<Fruit> cc = new Comparator<Fruit>() {
-
 			@Override
 			public int compare(Fruit o1, Fruit o2) {
-				// TODO Auto-generated method stub
-				return o1.compareTo(o2);
-				
 				// class Fruit에서 Override 완료
-//				if(o1.getPrice()>o2.getPrice()) {
-//					return 1;
-//				} else if(o1.getPrice()<o2.getPrice()) {
-//					return -1;
-//				} else {
-//					if(o1.getName().equals(o2.getName())) {
-//						return 0;
-//					} else {
-//						return -1;
-//					}
-//				}
+				return o1.compareTo(o2);
 			}
 		};
 
-		System.out.println();
-		System.out.println(Collections.binarySearch(list3, newFruit, cc));
+		System.out.println("조회 결과 ::");
 	    if (Collections.binarySearch(list3, newFruit, cc) >= 0)
 	    	/* binarySearch(a, key, comparator)
 	    	 * a : 검색 범위
 	    	 * key : 검색 대상
 	    	 * comparator : 검색 조건
 	    	 */
-	    System.out.println("조회 결과 "+ newFruit);
+	    System.out.println(newFruit);
 	    else System.out.println("조회결과 없다");
 
 	}
