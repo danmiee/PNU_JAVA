@@ -8,8 +8,8 @@ public class Queue {
 //	private int[] que; 			// 큐용 배열
 	private List<Integer> que; // 큐용 리스트
 	private int capacity; // 큐의 크기
-	private int front; // 맨 처음 요소 커서
-	private int rear; // 맨 끝 요소 커서
+//	private int front; // 맨 처음 요소 커서
+//	private int rear; // 맨 끝 요소 커서
 	private int num; // 현재 데이터 개수
 
 	// --- 실행시 예외(사용자정의): 큐가 비어있음 ---//
@@ -19,7 +19,7 @@ public class Queue {
 		public EmptyQueueException() {
 		}
 
-		public void show() {
+		public void print() {
 			System.out.println("큐가 비어 있습니다.");
 		}
 	}
@@ -30,7 +30,7 @@ public class Queue {
 		public OverflowQueueException() {
 		}
 
-		public void show() {
+		public void print() {
 			System.out.println("큐가 가득 찼습니다.");
 		}
 	}
@@ -38,14 +38,13 @@ public class Queue {
 	// --- 생성자(constructor) ---//
 	public Queue(int maxlen) {
 		num = 0;
-		front = 0;
-		rear = 0;
 		capacity = maxlen;
 		try {
-			// que = new int[capacity];
 			// 큐 본체용 배열을 생성(capacity = maxlen)
-			que = new ArrayList<>();
-		} catch (OutOfMemoryError e) { // 생성할 수 없음
+			// que = new int[capacity];
+			// 빈 리스트 생성
+			que = new ArrayList<>(capacity);
+		} catch (OutOfMemoryError e) { 			// 생성할 수 없음
 			capacity = 0;
 		}
 	}
@@ -56,9 +55,6 @@ public class Queue {
 			throw new OverflowQueueException(); // 큐가 가득 찼음
 		que.add(x);
 		num++;
-		rear++;
-		if (rear == capacity)
-			rear = 0;
 		return x;
 	}
 
@@ -66,13 +62,9 @@ public class Queue {
 	public int deque() throws EmptyQueueException {
 		if (num <= 0)
 			throw new EmptyQueueException(); // 큐가 비어있음
-		int x = que.get(front);
-		if (front == capacity)
-			front = 0;
-		else {
-			que.remove(x);
-			num--;
-		}
+		int x = que.get(0);
+		que.remove(0);
+		num--;
 		return x;
 
 	}
@@ -81,27 +73,22 @@ public class Queue {
 	public int peek() throws EmptyQueueException {
 		if (num <= 0)
 			throw new EmptyQueueException(); // 큐가 비어있음
-		return que.get(front);
+		return que.get(0);
 	}
 
 	// --- 큐를 비움 ---//
 	public void clear() {
-		for (int i = 0; i < que.size(); i++) {
-			que.remove(i);
-		}
-		num = front = rear = 0;
+		que.removeAll(que);
+		num = 0;
 	}
 
 	// --- 큐에서 x를 검색하여 인덱스(찾지 못하면 –1)를 반환 ---//
 	public int indexOf(int x) {
 		for (int i = 0; i < num; i++) {
-			int idx = (i + front) % capacity;
-			// i+front : front부터 시작
-			// %capacity : capacity까지 검색 ( i+front는 capacity를 넘게됨 )
-			if (que.get(idx) == x)
-				return idx;
+			if (que.get(i) == x)
+				return i;
 		}
-		return 0; // 검색 실패
+		return -1; // 검색 실패
 	}
 
 	// --- 큐의 크기를 반환 ---//
@@ -129,12 +116,9 @@ public class Queue {
 		if (num <= 0)
 			System.out.println("큐가 비어있습니다.");
 		else {
-			int idx = 0;
 			for (int i = 0; i < num; i++)
-				idx = (i + front) % capacity;
-			System.out.print(que.get(idx));
+			System.out.print(que.get(i));
 			System.out.println();
 		}
 	}
-
 }
