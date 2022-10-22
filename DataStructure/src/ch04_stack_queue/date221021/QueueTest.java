@@ -8,12 +8,11 @@ public class QueueTest {
 
 		Queue s = new Queue(3);
 		
-		System.out.printf("현재 데이터 개수: %d / %d\n", s.size(), s.getCapacity());
-		System.out.print("(1)인큐　(2)디큐　(3)피크　(4)덤프　(0)종료: ");
-		
 		while (true) {
 					
 			System.out.println(" "); // 메뉴 구분을 위한 빈 행 추가
+			System.out.printf("현재 데이터 개수: %d / %d\n", s.size(), s.getCapacity());
+			System.out.print("(1)인큐　(2)디큐　(3)피크　(4)덤프　(0)종료: ");
 
 			int menu = sc.nextInt();
 			if (menu == 0)
@@ -26,9 +25,8 @@ public class QueueTest {
 				x = sc.nextInt();
 				try {
 					s.enque(x);
-					System.out.printf("현재 데이터 개수: %d / %d\n", s.size(), s.getCapacity());
 				} catch (Queue.OverflowQueueException e) {
-					e.show();
+					e.print();
 				}
 				break;
 
@@ -37,7 +35,7 @@ public class QueueTest {
 					x = s.deque();
 					System.out.println("디큐한 데이터는 " + x + "입니다.");
 				} catch (Queue.EmptyQueueException e) {
-					e.show();
+					e.print();
 				}
 				break;
 
