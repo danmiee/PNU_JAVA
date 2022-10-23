@@ -21,6 +21,10 @@ public class Stack<T> {
 	private int top;
 
 	// »ý¼ºÀÚ(constructor)
+	public Stack() {
+		
+	}
+	
 	public Stack(int maxlen) {
 		top = 0;
 		capacity = maxlen;
