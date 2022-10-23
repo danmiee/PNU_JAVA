@@ -1,4 +1,4 @@
-package ch01.date221002;
+package ch03_search.date221012;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,6 +66,8 @@ public class ArraySort {
 
 		// 중복제거
 		System.out.println("중복제거::");
+		
+		// 변수가 없어지기 때문에 안좋은 코딩. ArrayList에서 중복제거할 것
 //		for (int i = 0; i < cities.length; i++) {
 //			for (int j = i + 1; j < cities.length; j++) {
 //				if (cities[i] != "" && cities[i].equals(cities[j])) {
@@ -73,18 +75,16 @@ public class ArraySort {
 //				}
 //			}
 //		}
-		// 변수가 없어지기 때문에 안좋은 코딩. ArrayList에서 중복제거
 
 		// Array > List
 		ArrayList<String> lst = new ArrayList<>();
 
-		// 중복제거
 		for(String item : cities) {
 			if(!lst.contains(item))
 				lst.add(item);
 		}
-		System.out.println(lst);
 		
+		// 실패!  마지막 인덱스 중복여부 확인불가
 //		int cnt = lst.size();
 //		for(int i=0; i<cnt; i++) {
 //			for(int j=i+1; j<cnt; j++) {
