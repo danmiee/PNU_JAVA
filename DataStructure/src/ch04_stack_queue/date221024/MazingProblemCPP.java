@@ -27,22 +27,22 @@ public class MazingProblemCPP {
 		}
 		
 		public Offsets(int a, int b) {
-			
+			this.a = a;
+			this.b = b;
 		}
 	}
-	Offsets moves = new Offsets();
+	static Offsets[] moves = new Offsets[8];
 	//offsets moves[8];
-	int[][] maze = new int[100][100];
-	int[][] mark = new int[100][100];
-	
+	static int[][] maze = new int[100][100];
+	static int[][] mark = new int[100][100];
 
-	public void path(int m, int p) {
+	public void path(maze, mark, int m, int p) {
 	//Output a path (if any) in the maze; rows is m, cols is p;
 		//start at (1,1)
 		mark[1][1] = 1;
 //		Stack<items> stack(m * p);
 		Stack <Items> stack = new Stack<>();
-		Items temp;
+		Items temp = null;
 		temp.x = 1; temp.y = 1; temp.dir = 2;
 		stack.push(temp);
 
@@ -87,9 +87,11 @@ public class MazingProblemCPP {
 					{ 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1 }, { 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1 },
 					{ 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1 }, { 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
 					{ 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1 }, { 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0 },
-					{ 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 }, { 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0 }, };
-			for (int ia = 0; ia < 8; ia++)
-				moves[ia] = new Offsets(0, 0);
+					{ 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 }, { 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0 }, 
+					};
+			
+			for (int ia = 0; ia < 8; ia++) {
+			moves[ia] = new Offsets(0, 0);
 			moves[0].a = -1;
 			moves[0].b = 0;
 			moves[1].a = -1;
@@ -106,7 +108,8 @@ public class MazingProblemCPP {
 			moves[6].b = -1;
 			moves[7].a = -1;
 			moves[7].b = -1;
-
+			}
+			
 			for (int i = 0; i < 14; i++) {
 				for (int j = 0; j < 17; j++) {
 					if ((i == 0) || (j == 0) || (i == 13) || (j == 16))
@@ -118,6 +121,7 @@ public class MazingProblemCPP {
 
 				}
 			}
+			
 			System.out.println("maze[12,15]::");
 			for (int i = 0; i <= 13; i++) {
 				for (int j = 0; j <= 16; j++) {
