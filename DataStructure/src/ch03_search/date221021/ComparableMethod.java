@@ -9,7 +9,6 @@ import java.util.List;
 import ch03_search.Fruit;
 
 public class ComparableMethod {
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		System.out.println("======스트링::");
 		String[] s = { "참외", "사과", "배", "딸기", "오렌지" };
