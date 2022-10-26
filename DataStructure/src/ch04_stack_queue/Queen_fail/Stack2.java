@@ -1,4 +1,4 @@
-package ch04_stack_queue.Queen;
+package ch04_stack_queue.Queen_fail;
 
 class Point {
 	private int ix;
@@ -26,93 +26,93 @@ class Point {
 }
 
 public class Stack2 {
-	private Point[] stk; // ìŠ¤íƒìš© ë°°ì—´
-	private int capacity; // ìŠ¤íƒì˜ í¬ê¸°
-	private int ptr; // ìŠ¤íƒ í¬ì¸í„°
+	private Point[] stk; // ?¤í???? ë°°ì??
+	private int capacity; // ?¤í???? ?¬ê¸°
+	private int ptr; // ?¤í?? ?¬ì?¸í??
 
-	// --- ì‹¤í–‰ì‹œ ì˜ˆì™¸ : ìŠ¤íƒì´ ë¹„ì–´ìˆìŒ ---//
+	// --- ?¤í???? ???? : ?¤í???? ë¹??´ì???? ---//
 	@SuppressWarnings("serial")
 	public class EmptyIntStackException extends RuntimeException {
 		public EmptyIntStackException() {
 		}
 	}
 
-	// --- ì‹¤í–‰ì‹œ ì˜ˆì™¸ : ìŠ¤íƒì´ ê°€ë“ ì°¸ ---//
+	// --- ?¤í???? ???? : ?¤í???? ê°??? ì°? ---//
 	@SuppressWarnings("serial")
 	public class OverflowIntStackException extends RuntimeException {
 		public OverflowIntStackException() {
 		}
 	}
 
-	// --- ìƒì„±ì(constructor) ---//
+	// --- ???±ì??(constructor) ---//
 	public Stack2(int maxlen) {
 		ptr = 0;
 		capacity = maxlen;
 		try {
-			stk = new Point[capacity]; // ìŠ¤íƒ ë³¸ì²´ìš© ë°°ì—´ì„ ìƒì„±
-		} catch (OutOfMemoryError e) { // ìƒì„±í•  ìˆ˜ ì—†ìŒ
+			stk = new Point[capacity]; // ?¤í?? ë³¸ì²´?? ë°°ì?´ì?? ????
+		} catch (OutOfMemoryError e) { // ???±í?? ?? ????
 			capacity = 0;
 		}
 	}
 
-	// --- ìŠ¤íƒì— xë¥¼ í‘¸ì‹œ ---//
+	// --- ?¤í???? xë¥? ?¸ì?? ---//
 	public Point push(Point p) throws OverflowIntStackException {
-		if (ptr >= capacity) // ìŠ¤íƒì´ ê°€ë“ ì°¸
+		if (ptr >= capacity) // ?¤í???? ê°??? ì°?
 			throw new OverflowIntStackException();
 		return stk[ptr++] = p;
 	}
 
-	// --- ìŠ¤íƒì—ì„œ ë°ì´í„°ë¥¼ íŒ(ì •ìƒì— ìˆëŠ” ë°ì´í„°ë¥¼ êº¼ëƒ„) ---//
+	// --- ?¤í?????? ?°ì?´í?°ë?? ??(?????? ???? ?°ì?´í?°ë?? êº¼ë??) ---//
 	public Point pop() throws EmptyIntStackException {
-		if (ptr <= 0) // ìŠ¤íƒì´ ë¹”
+		if (ptr <= 0) // ?¤í???? ë¹?
 			throw new EmptyIntStackException();
 		return stk[--ptr];
 	}
 
-	// --- ìŠ¤íƒì—ì„œ ë°ì´í„°ë¥¼ í”¼í¬(peek, ì •ìƒì— ìˆëŠ” ë°ì´í„°ë¥¼ ë“¤ì—¬ë‹¤ë´„) ---//
+	// --- ?¤í?????? ?°ì?´í?°ë?? ?¼í??(peek, ?????? ???? ?°ì?´í?°ë?? ?¤ì?¬ë?¤ë?) ---//
 	public Point peek() throws EmptyIntStackException {
-		if (ptr <= 0) // ìŠ¤íƒì´ ë¹”
+		if (ptr <= 0) // ?¤í???? ë¹?
 			throw new EmptyIntStackException();
 		return stk[ptr - 1];
 	}
 
-	// --- ìŠ¤íƒì„ ë¹„ì›€ ---//
+	// --- ?¤í???? ë¹??? ---//
 	public void clear() {
 		ptr = 0;
 	}
 
-	// --- ìŠ¤íƒì—ì„œ xë¥¼ ì°¾ì•„ ì¸ë±ìŠ¤(ë²Œê²¬í•˜ì§€ ëª»í•˜ë©´ â€“1)ë¥¼ ë°˜í™˜ ---//
+	// --- ?¤í?????? xë¥? ì°¾ì?? ?¸ë?±ì??(ë²?ê²¬í??ì§? ëª»í??ë©? ??1)ë¥? ë°??? ---//
 	public int indexOf(Point x) {
-		for (int i = ptr - 1; i >= 0; i--) // ì •ìƒ ìª½ì—ì„œ ì„ í˜•ê²€ìƒ‰
+		for (int i = ptr - 1; i >= 0; i--) // ???? ìª½ì???? ????ê²???
 			if (stk[i].equals(x))
-				return i; // ê²€ìƒ‰ ì„±ê³µ
-		return -1; // ê²€ìƒ‰ ì‹¤íŒ¨
+				return i; // ê²??? ?±ê³µ
+		return -1; // ê²??? ?¤í??
 	}
 
-	// --- ìŠ¤íƒì˜ í¬ê¸°ë¥¼ ë°˜í™˜ ---//
+	// --- ?¤í???? ?¬ê¸°ë¥? ë°??? ---//
 	public int getCapacity() {
 		return capacity;
 	}
 
-	// --- ìŠ¤íƒì— ìŒ“ì—¬ìˆëŠ” ë°ì´í„° ê°¯ìˆ˜ë¥¼ ë°˜í™˜ ---//
+	// --- ?¤í???? ???¬ì???? ?°ì?´í?? ê°???ë¥? ë°??? ---//
 	public int size() {
 		return ptr;
 	}
 
-	// --- ìŠ¤íƒì´ ë¹„ì–´ìˆëŠ”ê°€? ---//
+	// --- ?¤í???? ë¹??´ì????ê°?? ---//
 	public boolean isEmpty() {
 		return ptr <= 0;
 	}
 
-	// --- ìŠ¤íƒì´ ê°€ë“ ì°¼ëŠ”ê°€? ---//
+	// --- ?¤í???? ê°??? ì°¼ë??ê°?? ---//
 	public boolean isFull() {
 		return ptr >= capacity;
 	}
 
-	// --- ìŠ¤íƒ ì•ˆì˜ ëª¨ë“  ë°ì´í„°ë¥¼ ë°”ë‹¥ â†’ ì •ìƒ ìˆœì„œë¡œ í‘œì‹œ ---//
+	// --- ?¤í?? ???? ëª¨ë?? ?°ì?´í?°ë?? ë°??? ?? ???? ????ë¡? ???? ---//
 	public void dump() {
 		if (ptr <= 0)
-			System.out.println("ìŠ¤íƒì´ ë¹„ì–´ìˆìŠµë‹ˆë‹¤.");
+			System.out.println("?¤í???? ë¹??´ì???µë????.");
 		else {
 			for (int i = 0; i < ptr; i++)
 				System.out.print(stk[i] + " ");

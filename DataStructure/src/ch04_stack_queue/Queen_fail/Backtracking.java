@@ -18,9 +18,9 @@
 //	      => backtracking을 stack을 이용하여 push/pop으로 해결하는 것을 보이는 것임
 	
  */
-package ch04_stack_queue.Queen;
+package ch04_stack_queue.Queen_fail;
 
-import ch04_stack_queue.Queen.Stack2.EmptyIntStackException;
+import ch04_stack_queue.Queen_fail.Stack2.EmptyIntStackException;
 
 public class Backtracking {
 

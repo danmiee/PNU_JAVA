@@ -1,4 +1,4 @@
-package ch04_stack_queue.Queen;
+package ch04_stack_queue.Queen_fail;
 
 import java.util.Arrays;
 import ch04_stack_queue.date221019.Stack;
