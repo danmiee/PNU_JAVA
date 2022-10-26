@@ -1,7 +1,7 @@
 package ch05_recursive.Queen8x8;
 
 //연습5-10
-//８퀸 문제를 비재귀적으로 vnfdl(배치 상황을 □와 ■으로 출력)
+//８퀸 문제를 비재귀적으로 풀이(배치 상황을 □와 ■으로 출력)
 
 class EightQueenN {
 
