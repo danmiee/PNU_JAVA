@@ -25,6 +25,11 @@ public class Stack<T> {
 		
 	}
 	
+	@Override
+	public String toString() {
+		return "Stack [data=" + data + ", capacity=" + capacity + ", top=" + top + "]";
+	}
+
 	public Stack(int maxlen) {
 		top = 0;
 		capacity = maxlen;
