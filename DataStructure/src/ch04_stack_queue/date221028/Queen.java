@@ -21,26 +21,27 @@ public class Queen {
 		while (count < d.length) {
 
 			ix++; // 행변경
-			int cx = 0;
 			int cy = 0; // 0번째 열부터 시작
 
 			// 새로 체크하는 좌표
-			Point px = new Point(cx, cy);
+			Point px = new Point(ix, cy);
 
 			// 행 수만큼 반복
-			while (cx < d.length) {
+			while (ix < d.length) {
 
 				// 열 수만큼 반복
 				while (cy < d[0].length) {
 					// 체크할 수 있으면 푸쉬, 좌표기록, 체크개수 추가, 반복문 나가기
-					if (CheckMove(d,cx,cy)) {
+					if (CheckMove(d,ix,cy)) {
 						st.push(px);
 						count++;
 						break;
+					} else {
+						cy++;
 					}
 				}
 //				// 마지막 열이 아니면 다음 열로 이동
-				if (NextMove(d, cx, cy)) {
+				if (NextMove(d, ix, cy)) {
 					cy++;
 					// 마지막 열이면 pop하고 체크 개수 감소
 				} else {
@@ -136,6 +137,7 @@ public class Queen {
 			for (int j = 0; j < data[0].length; j++)
 				data[i][j] = 0;
 		System.out.println(Arrays.deepToString(data));
+		
 		SolveQueen(data);
 
 		for (int i = 0; i < data.length; i++) {
