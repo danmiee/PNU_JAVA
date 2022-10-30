@@ -1,5 +1,7 @@
 package ch04_stack_queue.date221028;
 
+import java.util.Arrays;
+
 class Point {
 	private int ix;
 	private int iy;
@@ -123,5 +125,10 @@ public class Stack2 {
 				System.out.print(stk[i] + " ");
 			System.out.println();
 		}
+	}
+
+	@Override
+	public String toString() {
+		return " [stk=" + Arrays.toString(stk) + ", capacity=" + capacity + ", ptr=" + ptr + "]";
 	}
 }

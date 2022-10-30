@@ -54,18 +54,18 @@ public class Queen {
 	}
 
 	// 체크함수 구현하기
-	public static boolean checkRow(int[][] d, int crow) {
-		for (int i = 0; i < d.length; i++) {
-			if (d[crow][i] == 1) {
+	public static boolean checkRow(int[][] d, int cx, int cy) {
+		for (int i = 0; i < cy; i++) {
+			if (d[cx][i] == 1) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static boolean checkCol(int[][] d, int ccol) {
-		for (int i = 0; i < d[0].length; i++) {
-			if (d[i][ccol] == 1) {
+	public static boolean checkCol(int[][] d, int cx, int cy) {
+		for (int i = 0; i < cx; i++) {
+			if (d[i][cy] == 1) {
 				return true;
 			}
 		}
@@ -75,7 +75,7 @@ public class Queen {
 	// x++, y-- or x--, y++ where 0<= x,y <= 7
 	public static boolean checkDiagSW(int[][] d, int cx, int cy) {
 		if (cx != 0 && cy != d[0].length - 1) {
-			while (cx == 0 || cy == 0) {
+			while (!(cx == 0 || cy == 0)) {
 				cx++;
 				cy--;
 				if (d[cx][cy] == 1)
@@ -83,7 +83,7 @@ public class Queen {
 			}
 		}
 		if (cx != d.length - 1 && cy != 0) {
-			while (cx == 0 || cy == d[0].length - 1) {
+			while (!(cx == 0 || cy == d[0].length - 1)) {
 				cx--;
 				cy++;
 				if (d[cx][cy] == 1)
@@ -96,7 +96,7 @@ public class Queen {
 	// x++, y++ or x--, y--
 	public static boolean checkDiagSE(int[][] d, int cx, int cy) {
 		if (cx != 0 && cy != 0) {
-			while (cx == d.length - 1 || cy == d[0].length - 1) {
+			while (!(cx == d.length - 1 || cy == d[0].length - 1)) {
 				cx++;
 				cy++;
 				if (d[cx][cy] == 1)
@@ -104,7 +104,7 @@ public class Queen {
 			}
 		}
 		if (cx != d.length - 1 && cy != d[0].length - 1) {
-			while (cx == 0 || cy == 0) {
+			while (!(cx == 0 || cy == 0)) {
 				cx--;
 				cy--;
 				if (d[cx][cy] == 1)
@@ -116,7 +116,7 @@ public class Queen {
 
 	// (x,y)로 이동 가능한지를 check
 	public static boolean CheckMove(int[][] d, int x, int y) {
-		if (checkRow(d, x) || checkCol(d, y) || checkDiagSW(d, x, y) || checkDiagSE(d, x, y)) {
+		if (checkRow(d, x, y) || checkCol(d, x, y) || checkDiagSW(d, x, y) || checkDiagSE(d, x, y)) {
 			return false;
 		}
 		return true;
