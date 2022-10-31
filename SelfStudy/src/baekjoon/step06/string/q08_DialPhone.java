@@ -49,6 +49,6 @@ public class q08_DialPhone {
 		
 		System.out.println(plus(confirm(str)));
 		
-		
+		sc.close();
 	}
 }
