@@ -11,105 +11,102 @@ public class Queen {
 
 		Stack2 st = new Stack2(10);
 		Point p = new Point(ix, iy);
-		
+
 		// 시작
 		d[ix][iy] = 1; // p(0,0)에 체크
 		count++; // 체크 개수
 		st.push(p); // 체크좌표 기록
 
-		// 모든 행 좌표에 체크할 때까지 반복
+		int cx = 0;
+		cx++; // 행변경
+
 		while (count < d.length) {
-
-			ix++; // 행변경
-			int cy = 0; // 0번째 열부터 시작
-
-			// 새로 체크하는 좌표
-			Point px = new Point(ix, cy);
-
 			// 행 수만큼 반복
-			while (ix < d.length) {
+			while (cx < d.length) {
+
+				// 0번째 열부터 시작
+				int cy = 0;
 
 				// 열 수만큼 반복
 				while (cy < d[0].length) {
+
 					// 체크할 수 있으면 푸쉬, 좌표기록, 체크개수 추가, 반복문 나가기
-					if (CheckMove(d,ix,cy)) {
+					if (CheckMove(d, cx, cy)) {
+						// 새로 체크하는 좌표
+						// push와 같은 위치에서 선언해야 정상반영
+						Point px = new Point(cx, cy);
 						st.push(px);
+						d[cx][cy] = 1;
 						count++;
+						cx++;
 						break;
-					} else {
+						// 체크 안했고 마지막열 아니면 cy++
+					} else if (NextMove(d, cx, cy)) {
 						cy++;
+						// 마지막 열이면 pop하고 체크 개수 감소
+					} else {
+						while (true) {
+							p = st.pop();
+							count--;
+							cx = p.getX();
+							cy = p.getY();
+							d[cx][cy] = 0;
+							if (cy != d[0].length - 1) {
+								cy++;
+								break;
+							}
+						}
 					}
 				}
-//				// 마지막 열이 아니면 다음 열로 이동
-				if (NextMove(d, ix, cy)) {
-					cy++;
-					// 마지막 열이면 pop하고 체크 개수 감소
-				} else {
-					p = st.pop();
-					count--;
-				}
 			}
-
 		}
 	}
 
 	// 체크함수 구현하기
-	public static boolean checkRow(int[][] d, int cx, int cy) {
-		for (int i = 0; i < cy; i++) {
-			if (d[cx][i] == 1) {
+	public static boolean checkRow(int[][] d, int x, int y) {
+		for (int i = 0; i < y; i++)
+			if (d[x][i] == 1)
 				return true;
-			}
-		}
 		return false;
 	}
 
-	public static boolean checkCol(int[][] d, int cx, int cy) {
-		for (int i = 0; i < cx; i++) {
-			if (d[i][cy] == 1) {
+	public static boolean checkCol(int[][] d, int x, int y) {
+		for (int i = 0; i < x; i++)
+			if (d[i][y] == 1)
 				return true;
-			}
-		}
 		return false;
 	}
 
 	// x++, y-- or x--, y++ where 0<= x,y <= 7
-	public static boolean checkDiagSW(int[][] d, int cx, int cy) {
-		if (cx != 0 && cy != d[0].length - 1) {
-			while (!(cx == 0 || cy == 0)) {
-				cx++;
-				cy--;
-				if (d[cx][cy] == 1)
-					return true;
-			}
+	public static boolean checkDiagSW(int[][] d, int x, int y) {
+		while (x < d.length - 1 && y > 0) {
+			x++;
+			y--;
+			if (d[x][y] == 1)
+				return true;
 		}
-		if (cx != d.length - 1 && cy != 0) {
-			while (!(cx == 0 || cy == d[0].length - 1)) {
-				cx--;
-				cy++;
-				if (d[cx][cy] == 1)
-					return true;
-			}
+		while (x > 0 && y < d[0].length - 1) {
+			x--;
+			y++;
+			if (d[x][y] == 1)
+				return true;
 		}
 		return false;
 	}
 
 	// x++, y++ or x--, y--
-	public static boolean checkDiagSE(int[][] d, int cx, int cy) {
-		if (cx != 0 && cy != 0) {
-			while (!(cx == d.length - 1 || cy == d[0].length - 1)) {
-				cx++;
-				cy++;
-				if (d[cx][cy] == 1)
-					return true;
-			}
+	public static boolean checkDiagSE(int[][] d, int x, int y) {
+		while (x < d.length - 1 && y < d[0].length - 1) {
+			x++;
+			y++;
+			if (d[x][y] == 1)
+				return true;
 		}
-		if (cx != d.length - 1 && cy != d[0].length - 1) {
-			while (!(cx == 0 || cy == 0)) {
-				cx--;
-				cy--;
-				if (d[cx][cy] == 1)
-					return true;
-			}
+		while (x > 0 && y > 0) {
+			x--;
+			y--;
+			if (d[x][y] == 1)
+				return true;
 		}
 		return false;
 	}
@@ -125,19 +122,19 @@ public class Queen {
 	// 다음 row로 이동여부 판단
 	public static boolean NextMove(int[][] d, int row, int col) {
 		// 마지막 열이 아니면 다음 열로 이동
-		if (col == d[0].length-1)
+		if (col != d[0].length - 1)
 			return true;
 		return false;
 	}
 
 	public static void main(String[] args) {
-		int row = 4, col = 4;
+		int row = 8, col = 8;
 		int[][] data = new int[row][col];
 		for (int i = 0; i < data.length; i++)
 			for (int j = 0; j < data[0].length; j++)
 				data[i][j] = 0;
 		System.out.println(Arrays.deepToString(data));
-		
+
 		SolveQueen(data);
 
 		for (int i = 0; i < data.length; i++) {
