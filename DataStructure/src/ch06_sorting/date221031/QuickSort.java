@@ -52,33 +52,56 @@ public class QuickSort {
 		System.out.print("st: ");
 		st.dump();
 
-		while(st.isEmpty() != true) {
+		while (st.isEmpty() != true) {
 			Point p = st.pop();
 			System.out.println("p: " + p);
-			
+
 			int px = p.getX();
 			int py = p.getY();
-			int x = (px+py)/2;
+			int x = (px + py) / 2;
+
+			if(px < x) {
+			Point pl = new Point(px, x);
+			st.push(pl);
+			}
+			if(x+1 < py) {
+			Point pr = new Point(x + 1, py);
+			st.push(pr);
+			}
+			
 			System.out.println("x: " + x);
+
+			System.out.println("a(befroe): " + Arrays.toString(a));
 			
 			do {
-				while (a[left] < a[px])
+				while (a[px] < a[x])
 					px++;
-				while (a[py] < a[right])
+				while (a[x] < a[py])
 					py--;
-				if(px <= py)
+				
+				/*
+				
+				a[x]=1이고 오른쪽에 있는 4,2가 모두 1보다 크기 때문에 자리 변동이 없음
+				어떻게 해결해야할까?
+				
+				st: P(0, 4)
+				p: P(0, 4)
+				x: 2
+				a(befroe): [5, 3, 1, 4, 2, 6, 7, 8, 9, 10]
+				a(after): [1, 3, 5, 4, 2, 6, 7, 8, 9, 10]
+				
+				*/
+				
+				if (px <= py)
 					swap(a, px++, py--);
-			} while(px <= py);
+			} while (px <= py);
+
+			System.out.println("a(after): " + Arrays.toString(a));
 			
-			if(left < x) {
-				Point pl = new Point(left, x);
-				Point pr = new Point(x+1, right);
-				st.push(pl);
-				st.push(pr);
-				System.out.print("st: ");
-				st.dump();
-			}
+			System.out.print("st: ");
+			st.dump();
 		}
+
 	}
 
 	public static void main(String[] args) {
