@@ -48,70 +48,77 @@ public class QuickSort {
 		Stack<Point> st = new Stack<Point>(50);
 		Point pt = new Point(left, right);
 
-		st.push(pt);
-		System.out.print("st: ");
-		st.dump();
+		/*
+		 * a[x]=1이고 오른쪽에 있는 4,2가 모두 1보다 크기 때문에 자리 변동이 없음 어떻게 해결해야할까?
+		 * >> 한번더!  flag로 push 반복문 추가
+		 * 
+		 * st: P(0, 4) p: P(0, 4) x: 2 a(before): [5, 3, 1, 4, 2, 6, 7, 8, 9, 10]
+		 * a(after): [1, 3, 5, 4, 2, 6, 7, 8, 9, 10]
+		 */
+		
+		boolean flag = true;
+		
+		while (flag) {
 
-		while (st.isEmpty() != true) {
-			Point p = st.pop();
-			System.out.println("p: " + p);
-
-			int px = p.getX();
-			int py = p.getY();
-			int x = (px + py) / 2;
-
-			if(px < x) {
-			Point pl = new Point(px, x);
-			st.push(pl);
+			for (int i = 0; i < a.length; i++) {
+				for (int j = a.length - 1; j > 0; j--) {
+					if (a[j - 1] > a[j]) {
+						flag = true;
+						break;
+					} else
+						flag = false;
+				}
 			}
-			if(x+1 < py) {
-			Point pr = new Point(x + 1, py);
-			st.push(pr);
+			
+			st.push(pt);
+//			System.out.print("st: ");
+//			st.dump();
+
+			while (st.isEmpty() != true) {
+				Point p = st.pop();
+//				System.out.println("p: " + p);
+
+				int px = p.getX();
+				int py = p.getY();
+				int x = (px + py) / 2;
+//				System.out.println("x: " + x);
+
+//				System.out.println("a(before): " + Arrays.toString(a));
+				if (px < x) {
+					Point pl = new Point(px, x);
+					st.push(pl);
+				}
+				if (x + 1 < py) {
+					Point pr = new Point(x + 1, py);
+					st.push(pr);
+				}
+
+				do {
+					while (a[px] < a[x])
+						px++;
+					while (a[x] < a[py])
+						py--;
+					if (px <= py)
+						swap(a, px++, py--);
+				} while (px <= py);
+
+//				System.out.println("a(after): " + Arrays.toString(a));
+
+//				System.out.print("st: ");
+//				st.dump();
 			}
-			
-			System.out.println("x: " + x);
-
-			System.out.println("a(befroe): " + Arrays.toString(a));
-			
-			do {
-				while (a[px] < a[x])
-					px++;
-				while (a[x] < a[py])
-					py--;
-				
-				/*
-				
-				a[x]=1이고 오른쪽에 있는 4,2가 모두 1보다 크기 때문에 자리 변동이 없음
-				어떻게 해결해야할까?
-				
-				st: P(0, 4)
-				p: P(0, 4)
-				x: 2
-				a(befroe): [5, 3, 1, 4, 2, 6, 7, 8, 9, 10]
-				a(after): [1, 3, 5, 4, 2, 6, 7, 8, 9, 10]
-				
-				*/
-				
-				if (px <= py)
-					swap(a, px++, py--);
-			} while (px <= py);
-
-			System.out.println("a(after): " + Arrays.toString(a));
-			
-			System.out.print("st: ");
-			st.dump();
 		}
 
 	}
 
 	public static void main(String[] args) {
 		int nx = 10;
-//		int[] x = new int[10];
-//		for (int ix = 0; ix < 10; ix++) {
-//			double d = Math.random();
-//			x[ix] = (int) (d * 20);
-//		}
-		int[] x = { 5, 7, 1, 4, 6, 2, 3, 9, 8, 10 };
+		int[] x = new int[10];
+		for (int ix = 0; ix < 10; ix++) {
+			double d = Math.random();
+			x[ix] = (int) (d * 20);
+		}
+//		int[] x = { 5, 7, 1, 4, 6, 2, 3, 9, 8, 10 };
 		for (int i = 0; i < nx; i++)
 			System.out.print(" " + x[i]);
 		System.out.println();
