@@ -4,6 +4,37 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+class Point {
+	private int ix;
+	private int iy;
+
+	public Point(int x, int y) {
+		ix = x;
+		iy = y;
+	}
+
+	public int getX() {
+		return ix;
+	}
+
+	public int getY() {
+		return iy;
+	}
+
+	public void setX(int x) {
+		ix = x;
+	}
+
+	public void setY(int y) {
+		iy = y;
+	}
+
+	@Override
+	public String toString() {
+		return "P(" + ix + ", " + iy + ")";
+	}
+}
+
 public class Stack<T> {
 // p. 133 코드를 General을 활용하여 리스트로 고치기
 
@@ -22,7 +53,9 @@ public class Stack<T> {
 
 	// 생성자(constructor)
 	public Stack() {
-		
+		top = 0;
+		capacity = 0;
+		data = new ArrayList<>(Collections.emptyList());
 	}
 	
 	@Override
