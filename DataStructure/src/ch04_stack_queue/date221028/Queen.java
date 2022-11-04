@@ -1,7 +1,5 @@
 package ch04_stack_queue.date221028;
 
-import java.util.Arrays;
-
 public class Queen {
 	@SuppressWarnings("unused")
 	public static void SolveQueen(int[][] d) {
@@ -9,7 +7,7 @@ public class Queen {
 		int count = 0, mode = 0;
 		int ix = 0, iy = 0;
 
-		Stack2 st = new Stack2(10);
+		Stack st = new Stack(10);
 		Point p = new Point(ix, iy);
 
 		// 시작
@@ -20,41 +18,37 @@ public class Queen {
 		int cx = 0;
 		cx++; // 행변경
 
-		while (count < d.length) {
-			// 행 수만큼 반복
-			while (cx < d.length) {
+		// 행 수만큼 반복
+		while (cx < d.length) {
+			// 0번째 열부터 시작
+			int cy = 0;
+			// 열 수만큼 반복
+			while (cy < d[0].length) {
 
-				// 0번째 열부터 시작
-				int cy = 0;
-
-				// 열 수만큼 반복
-				while (cy < d[0].length) {
-
-					// 체크할 수 있으면 푸쉬, 좌표기록, 체크개수 추가, 반복문 나가기
-					if (CheckMove(d, cx, cy)) {
-						// 새로 체크하는 좌표
-						// push와 같은 위치에서 선언해야 정상반영
-						Point px = new Point(cx, cy);
-						st.push(px);
-						d[cx][cy] = 1;
-						count++;
-						cx++;
-						break;
-						// 체크 안했고 마지막열 아니면 cy++
-					} else if (NextMove(d, cx, cy)) {
-						cy++;
-						// 마지막 열이면 pop하고 체크 개수 감소
-					} else {
-						while (true) {
-							p = st.pop();
-							count--;
-							cx = p.getX();
-							cy = p.getY();
-							d[cx][cy] = 0;
-							if (cy != d[0].length - 1) {
-								cy++;
-								break;
-							}
+				// 체크할 수 있으면 푸쉬, 좌표기록, 체크개수 추가, 반복문 나가기
+				if (CheckMove(d, cx, cy)) {
+					// 새로 체크하는 좌표
+					// push와 같은 위치에서 선언해야 정상반영
+					Point px = new Point(cx, cy);
+					st.push(px);
+					d[cx][cy] = 1;
+					count++;
+					cx++;
+					break;
+					// 체크 안했고 마지막열 아니면 cy++
+				} else if (NextMove(d, cx, cy)) {
+					cy++;
+					// 마지막 열이면 pop하고 체크 개수 감소
+				} else {
+					while (true) {
+						p = st.pop();
+						count--;
+						cx = p.getX();
+						cy = p.getY();
+						d[cx][cy] = 0;
+						if (cy != d[0].length - 1) {
+							cy++;
+							break;
 						}
 					}
 				}
@@ -130,13 +124,19 @@ public class Queen {
 	public static void main(String[] args) {
 		int row = 8, col = 8;
 		int[][] data = new int[row][col];
-		for (int i = 0; i < data.length; i++)
-			for (int j = 0; j < data[0].length; j++)
+		
+		System.out.println("[초기상태]");
+		for (int i = 0; i < data.length; i++) {
+			for (int j = 0; j < data[0].length; j++) {
 				data[i][j] = 0;
-		System.out.println(Arrays.deepToString(data));
+				System.out.print(" " + data[i][j]);
+			}
+		System.out.println();
+		}
 
 		SolveQueen(data);
 
+		System.out.println("[SolveQueen 결과]");
 		for (int i = 0; i < data.length; i++) {
 			for (int j = 0; j < data[0].length; j++) {
 				System.out.print(" " + data[i][j]);
