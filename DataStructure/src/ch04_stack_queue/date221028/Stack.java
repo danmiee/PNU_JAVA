@@ -32,7 +32,7 @@ class Point {
 	}
 }
 
-public class Stack2 {
+public class Stack {
 	private Point[] stk; // 스택용 배열
 	private int capacity; // 스택의 크기
 	private int ptr; // 스택 포인터
@@ -52,7 +52,7 @@ public class Stack2 {
 	}
 
 	// --- 생성자(constructor) ---//
-	public Stack2(int maxlen) {
+	public Stack(int maxlen) {
 		ptr = 0;
 		capacity = maxlen;
 		try {
