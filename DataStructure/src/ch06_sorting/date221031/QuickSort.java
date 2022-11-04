@@ -1,36 +1,5 @@
 package ch06_sorting.date221031;
 
-class Point {
-	private int ix;
-	private int iy;
-
-	public Point(int x, int y) {
-		ix = x;
-		iy = y;
-	}
-
-	public int getX() {
-		return ix;
-	}
-
-	public int getY() {
-		return iy;
-	}
-
-	public void setX(int x) {
-		ix = x;
-	}
-
-	public void setY(int y) {
-		iy = y;
-	}
-
-	@Override
-	public String toString() {
-		return "P(" + ix + ", " + iy + ")";
-	}
-}
-
 public class QuickSort {
 
 	// --- 배열 요소 a[idx1]와 a[idx2]의 값을 교환 ---//
