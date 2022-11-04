@@ -1,7 +1,5 @@
 package ch06_sorting.date221031;
 
-import java.util.Arrays;
-
 class Point {
 	private int ix;
 	private int iy;
