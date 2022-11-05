@@ -60,57 +60,63 @@ public class Queen {
 	public static boolean checkRow(int[][] d, int x, int y) {
 		for (int i = 0; i < y; i++)
 			if (d[x][i] == 1)
-				return true;
-		return false;
+				return false;
+		return true;
 	}
 
 	public static boolean checkCol(int[][] d, int x, int y) {
 		for (int i = 0; i < x; i++)
 			if (d[i][y] == 1)
-				return true;
-		return false;
+				return false;
+		return true;
 	}
 
 	// x++, y-- or x--, y++ where 0<= x,y <= 7
 	public static boolean checkDiagSW(int[][] d, int x, int y) {
-		while (x < d.length - 1 && y > 0) {
-			x++;
-			y--;
-			if (d[x][y] == 1)
-				return true;
+		int cx = x, cy = y;
+		while (cx < d.length - 1 && cy > 0) {
+			cx++;
+			cy--;
+			if (d[cx][cy] == 1)
+				return false;
 		}
-		while (x > 0 && y < d[0].length - 1) {
-			x--;
-			y++;
-			if (d[x][y] == 1)
-				return true;
+		cx = x;
+		cy = y;
+		while (cx > 0 && cy < d[0].length - 1) {
+			cx--;
+			cy++;
+			if (d[cx][cy] == 1)
+				return false;
 		}
-		return false;
+		return true;
 	}
 
 	// x++, y++ or x--, y--
 	public static boolean checkDiagSE(int[][] d, int x, int y) {
-		while (x < d.length - 1 && y < d[0].length - 1) {
-			x++;
-			y++;
-			if (d[x][y] == 1)
-				return true;
+		int cx = x, cy = y;
+		while (cx < d.length - 1 && cy < d[0].length - 1) {
+			cx++;
+			cy++;
+			if (d[cx][cy] == 1)
+				return false;
 		}
-		while (x > 0 && y > 0) {
-			x--;
-			y--;
-			if (d[x][y] == 1)
-				return true;
+		cx = x;
+		cy = y;
+		while (cx > 0 && cy > 0) {
+			cx--;
+			cy--;
+			if (d[cx][cy] == 1)
+				return false;
 		}
-		return false;
+		return true;
 	}
 
 	// (x,y)로 이동 가능한지를 check
 	public static boolean CheckMove(int[][] d, int x, int y) {
-		if (checkRow(d, x, y) || checkCol(d, x, y) || checkDiagSW(d, x, y) || checkDiagSE(d, x, y)) {
-			return false;
+		if (checkRow(d, x, y) && checkCol(d, x, y) && checkDiagSW(d, x, y) && checkDiagSE(d, x, y)) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	// 다음 row로 이동여부 판단
