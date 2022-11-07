@@ -1,4 +1,4 @@
-package ch06_sorting.date221104;
+package ch06_sorting.date221107;
 
 public class MergeSortTest {
 	// --- 배열 요소 a[idx1]와 a[idx2]의 값을 교환 ---//
