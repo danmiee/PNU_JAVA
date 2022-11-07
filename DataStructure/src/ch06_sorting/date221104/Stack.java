@@ -53,9 +53,6 @@ public class Stack<T> {
 
 	// »ý¼ºÀÚ(constructor)
 	public Stack() {
-		top = 0;
-		capacity = 0;
-		data = new ArrayList<>(Collections.emptyList());
 	}
 	
 	@Override
