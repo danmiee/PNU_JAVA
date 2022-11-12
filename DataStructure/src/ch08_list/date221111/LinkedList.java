@@ -63,7 +63,7 @@ public class LinkedList<E> {
 	}
 
 	// --- 꼬리 노드 삽입 ---//
-	public void add(E obj, Comparator<? super E> no, Comparator<? super E> name) {
+	public void add(E obj, Comparator<? super E> no) {
 		// 포인터 헤드에 두기
 		Node<E> ptr = head, q = head;
 		Node<E> crnt = new Node<E>(obj);
@@ -75,12 +75,10 @@ public class LinkedList<E> {
 		// 포인터가 비어있지 않은 동안 실행
 		while (ptr != null) {
 			if (no.compare(obj, ptr.getData()) <= 0) {
-				if (name.compare(obj, ptr.getData()) <= 0) {
 					// obj가 포인터보다 작으면 앞에 삽입하고 종료
 					q.setNext(crnt);
 					crnt.setNext(ptr);
 					return;
-				}
 			} else {
 				// obj가 포인터보다 크면 뒤쪽 노드 주목
 				q = ptr;
@@ -92,25 +90,22 @@ public class LinkedList<E> {
 	}
 
 	// --- 노드 삭제 ---//
-	public void delete(E obj, Comparator<? super E> no, Comparator<? super E> name) { // 전달 객체를 삭제
+	public void delete(E obj, Comparator<? super E> no) { // 전달 객체를 삭제
 		// 포인터 헤드에 두기
 		Node<E> ptr = head, q = head;
-		if(no.compare(obj, head.getData()) == 0)
-			if(name.compare(obj, head.getData()) == 0) {
-				// 번호와 이름이 모두 머리와 일치하면 머리에 뒤쪽 노드 삽입하고 종료
-				head = head.getNext();
-				return;
-			}
+		if (no.compare(obj, head.getData()) == 0) {
+			// 번호와 이름이 모두 머리와 일치하면 머리에 뒤쪽 노드 삽입하고 종료
+			head = head.getNext();
+			return;
+		}
 
 		while (ptr != null) {
 			// 번호와 이름이 일치할 때만 실행
 			if (no.compare(obj, ptr.getData()) == 0) {
-				if (name.compare(obj, ptr.getData()) == 0) {
-					// 뒤쪽 노드가 null이 아니면 현재 위치에 뒤쪽 노드 삽입하고 종료
-					if (ptr != null) {
-						q.setNext(ptr.getNext());
-						return;
-					}
+				// 뒤쪽 노드가 null이 아니면 현재 위치에 뒤쪽 노드 삽입하고 종료
+				if (ptr != null) {
+					q.setNext(ptr.getNext());
+					return;
 				}
 			} else {
 				// 일치하지 않으면 뒤쪽 노드 주목

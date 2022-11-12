@@ -107,14 +107,14 @@ public class Test_LinkedList {
 			case ADD: // ª¿‘
 				data = new Data();
 				data.scanData("ª¿‘", Data.NO | Data.NAME);
-				list.add(data, Data.NO_ORDER, Data.NAME_ORDER);
+				list.add(data, Data.NO_ORDER);
 //				System.out.println("Data: " + data);
 				break;
 
 			case DELETE: // ªË¡¶
 				data = new Data();
 				data.scanData("ªË¡¶", Data.NO | Data.NAME);
-				list.delete(data, Data.NO_ORDER, Data.NAME_ORDER);
+				list.delete(data, Data.NO_ORDER);
 				System.out.println("Data: " + data);
 				break;
 
