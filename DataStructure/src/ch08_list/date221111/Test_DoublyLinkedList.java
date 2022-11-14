@@ -116,7 +116,7 @@ public class Test_DoublyLinkedList {
 
 				case DELETE: // 삭제
 					data = new Data();
-					data.scanData("삽입", Data.NO | Data.NAME);
+					data.scanData("삭제", Data.NO | Data.NAME);
 					list.delete(data, Data.NO_ORDER);
 					break;
 
