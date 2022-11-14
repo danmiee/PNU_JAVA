@@ -101,36 +101,59 @@ public class DoublyLinkedList<E> {
 		}
 
 		// 머리 노드의 뒤쪽 노드를 임시 노드로 선언
-		dNode<E> tempL = first.getLlink();
-		dNode<E> tempR = first.getRlink();
+		dNode<E> prev = first.getLlink();
+		dNode<E> next = first.getRlink();
 		while (true) {
 			// 입력값이 임시 노드보다 작거나 같을 때
-			if (c.compare(obj, tempR.getData()) <= 0) {
+			if (c.compare(obj, next.getData()) <= 0) {
 				// 매개변수를 값으로 하는 포인터 선언
-				dNode<E> ptr = new dNode<>(obj, tempR.getLlink(), tempR);
+				dNode<E> ptr = new dNode<>(obj, next.getLlink(), next);
 				// 임시 노드 앞쪽 노드에 포인터 삽입 - 앞쪽 노드의 Rlink와 뒤쪽 노드의 Llink 일치해야 정상 출력됨
-				tempL.setRlink(ptr);
-				tempR.setLlink(ptr);
-				System.out.println(ptr);
-				System.out.println(tempR);
+				prev.setRlink(ptr);
+				next.setLlink(ptr);
+//				System.out.println(ptr);
+//				System.out.println(next);
 				// 메소드 종료
 				return;
 			}
 			// 임시 노드의 뒤쪽 노드가 머리 노드와 같으면 반복 종료
-			if (tempR.getRlink() == first)
+			if (next.getRlink() == first)
 				break;
+			// 
+			prev = next;
 			// 뒤쪽 노드에 주목
-			tempL = tempR;
-			tempR = tempR.getRlink();
+			next = next.getRlink();
 		}
 		// 마지막에 넣을 포인터 선언
-		dNode<E> ptr = new dNode<>(obj, tempR, first);
+		dNode<E> ptr = new dNode<>(obj, next, first);
 		// 임시 노드 뒤쪽 노드에 포인터 삽입
-		tempR.setRlink(ptr);
+		next.setRlink(ptr);
 	}
 
 	// --- list에 삭제할 데이터가 있으면 해당 노드를 삭제 ---//
 	public void delete(E obj, Comparator<? super E> c) {
-		
+		// 머리 노드의 뒤쪽 노드를 임시 노드로 선언
+		dNode<E> prev = first;
+		dNode<E> next = first.getRlink().getRlink();
+		while (true) {
+			// obj가 다른 노드 사이에 있는 경우
+			if (c.compare(obj, prev.getRlink().getData()) == 0) {
+//				System.out.println("[삭제전]");
+//				System.out.println("prev: " + prev);
+//				System.out.println("next: " + next);
+				prev.setRlink(next);
+				next.setLlink(prev);
+//				System.out.println("[삭제후]");
+//				System.out.println("prev: " + prev);
+//				System.out.println("next: " + next);
+				return;
+			}
+			if (next.getRlink()==first)
+				break;
+			prev = prev.getRlink();
+			next = next.getRlink();
+		}
+		// obj가 마지막 노드에 있는 경우
+		prev.getRlink().setRlink(first);
 	}
 }
