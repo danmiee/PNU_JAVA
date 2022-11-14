@@ -42,13 +42,13 @@ class dNode<E> {
 	}
 }
 
-public class DoubledLinkedList<E> {
+public class DoublyLinkedList<E> {
 	//원형 이중 연결 리스트 클래스 - first node를 가짐
 
 		private dNode<E> first; // 머리 포인터(참조하는 곳은 더미노드)
 		
 		// --- 생성자(constructor) ---//
-		public DoubledLinkedList() {
+		public DoublyLinkedList() {
 			first = new dNode<E>(); // dummy(first) 노드를 생성
 		}
 

@@ -3,7 +3,7 @@ package ch08_list.date221111;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class Test_DoubledLinkedList {
+public class Test_DoublyLinkedList {
 	//원형 이중 연결 리스트 클래스 DoubleLinkedList<E>의 사용 예
 
 	 static Scanner stdIn = new Scanner(System.in);
@@ -104,7 +104,7 @@ public class Test_DoubledLinkedList {
 	     Data ptr;                                 // 검색용 데이터 참조
 	     Data temp = new Data();                   // 읽어 들일 데이터
 
-	     DoubledLinkedList<Data> list = new DoubledLinkedList<Data>(); // 리스트를 생성
+	     DoublyLinkedList<Data> list = new DoublyLinkedList<Data>(); // 리스트를 생성
 	     do {
 				switch (menu = SelectMenu()) {
 
