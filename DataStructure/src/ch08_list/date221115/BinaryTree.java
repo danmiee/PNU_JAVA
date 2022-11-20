@@ -3,11 +3,12 @@ package ch08_list.date221115;
 import java.util.Scanner;
 
 class TreeNode {
-	public TreeNode LeftChild;
 	public int data;
+	public TreeNode LeftChild;
 	public TreeNode RightChild;
 
-	public TreeNode() {
+	public TreeNode(int data) {
+		this.data = data;
 		LeftChild = RightChild = null;
 	}
 }
@@ -39,6 +40,7 @@ class Tree {
 		postorder(root);
 	}
 
+	// LVR
 	void inorder(TreeNode CurrentNode) {
 		if (CurrentNode != null) {
 			inorder(CurrentNode.LeftChild);
@@ -47,6 +49,7 @@ class Tree {
 		}
 	}
 
+	// VLR
 	void preorder(TreeNode CurrentNode) {
 		if (CurrentNode != null) {
 			System.out.print(CurrentNode.data + " ");
@@ -55,6 +58,7 @@ class Tree {
 		}
 	}
 
+	// LRV
 	void postorder(TreeNode CurrentNode) {
 		if (CurrentNode != null) {
 			postorder(CurrentNode.LeftChild);
@@ -64,36 +68,45 @@ class Tree {
 	}
 
 	boolean Insert(int x) {// binary search tree를 만드는 입력
-		TreeNode p = root;
-		TreeNode q = new TreeNode();
-		q.data = x;
+		// 최초 노드 삽입
+		if (root == null) {
+			root = new TreeNode(x);
+			System.out.println("insert: " + x);
+			return true;
+		}
 
-		// p가 null일 때까지 반복
-		while (true) {
-			// p가 null이면 q 삽입
-			if (p == null) {
-				p = q;
-				return true;
-			// x가 p의 data보다 작으면 left 주목
+		TreeNode p = root;
+		TreeNode q = new TreeNode(x);
+
+		// p가 null 아닌 동안 반복
+		while (p != null) {
+			if (x == p.data) {
+				return false;
+				// x가 p의 data보다 작으면 left 주목
 			} else if (x < p.data) {
 				// left가 null이면 q 삽입
 				if (p.LeftChild == null) {
 					p.LeftChild = q;
-				// left가 존재하면 left를 루트로 만들어서 반복
+					System.out.println("insert: " + x);
+					return true;
+					// left가 존재하면 left를 루트로 만들어서 반복
 				} else {
 					p = p.LeftChild;
 				}
-			// 나머지 경우
-			} else {
+				// x가 p의 data보다 크면 rignt 주목
+			} else if (x > p.data) {
 				// right가 null이면 q 삽입
 				if (p.RightChild == null) {
 					p.RightChild = q;
-				// right가 존재하면 right를 루트로 만들어서 반복
+					System.out.println("insert: " + x);
+					return true;
+					// right가 존재하면 right를 루트로 만들어서 반복
 				} else {
 					p = p.RightChild;
 				}
 			}
 		}
+		return true;
 	}
 
 	boolean Delete(int x) {// binary search tree에서 x가 있으면 삭제하는 구현
@@ -124,7 +137,7 @@ public class BinaryTree {
 				}
 				for (int i = 0; i < nx; i++) {
 					if (t.Insert(input[i]) == false)
-						System.out.println("Insert Duplicated data");
+						System.out.println("Insert Duplicated data: " + input[i]);
 				}
 				break;
 			case 2:
@@ -136,9 +149,11 @@ public class BinaryTree {
 				break;
 			case 4:
 				t.postorder();
+				System.out.println();
 				break;
 			case 5:
 				t.inorder();
+				System.out.println();
 				break;
 			case 6:
 				System.out.println("Quit");
