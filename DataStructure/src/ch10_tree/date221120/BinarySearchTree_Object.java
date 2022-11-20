@@ -36,6 +36,11 @@ class TreeNode3 {
 	public TreeNode3() {
 		LeftChild = RightChild = null;
 	}
+	
+	public TreeNode3(Student data) {
+		this.data = data;
+		LeftChild = RightChild = null;
+	}
 }
 
 class Tree3 {
@@ -89,14 +94,40 @@ class Tree3 {
 	}
 
 	boolean Insert(Student input) {// binary search tree를 만드는 입력
-		TreeNode3 p = root;
-		TreeNode3 q = null;
+		TreeNode3 crntNode = root;
+		TreeNode3 newNode = new TreeNode3(input);
 //구현해야 한다 
+		// 최초 노드 삽입
+		// crntNode가 null 아닌동안 반복
+			// x와 crntNode 비교
+			// <0 => left 주목
+				// left null이면 newNode 삽입
+				// left 존재하면 left를 루트로 반복
+			// >0 => right 주목
+				// right null이면 newNode 삽입
+				// right 존재하면 right를 루트로 반복 
 		return true;
 	}
 
-	boolean Delete(Integer  x) {// binary search tree에서 x가 있으면 삭제하는 구현
+	boolean Delete(Integer x) {// binary search tree에서 x가 있으면 삭제하는 구현
 //구현해야 한다 
+		// x를 data로 갖는 노드 선언
+			// 트리 내 존재여부 확인
+				// del 처리 시 부모노드 확인 위해 keep
+				// x가 작으면 왼쪽 탐색
+					// x가 크면 오른쪽 탐색
+			// 찾는 data 없으면 false 반환
+			// 단말노드인 경우
+			// 자식노드 하나인 경우
+				// delNode가 부모의 왼쪽일 때
+				// delNode가 부모의 오른쪽일 때
+			// 자식노드 둘인 경우
+				// 교체용 노드 선언(삭제할 노드의 오른쪽 자식노드 > 가장 작은 값 필요)
+				// 교체용 노드 트리 중 가장 작은 값 찾기
+				// 삭제 노드 위치에 교체용 노드 넣어주기
+				// 교체용 노드가 부모의 왼쪽에 있으면
+					// 교체용 노드의 오른쪽 트리를 부모노드 왼쪽으로 연결
+				// 아니면 교체용 노드의 오른쪽 트리를 부모노드 오른쪽으로 연결
 		return true;
 	}
 }
@@ -125,7 +156,7 @@ public class BinarySearchTree_Object {
 				}
 				for (int i = 0; i < nx; i++) {
 					if ((t.Insert(input[i])) == false)
-						System.out.println("Insert Duplicated data");
+						System.out.println("Insert Duplicated data: " + input[i]);
 				}
 				break;
 			case 2:
