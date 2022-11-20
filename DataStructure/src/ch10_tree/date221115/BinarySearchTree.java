@@ -1,4 +1,4 @@
-package ch08_list.date221115;
+package ch10_tree.date221115;
 
 import java.util.Scanner;
 
@@ -184,7 +184,7 @@ class Tree {
 	}
 }
 
-public class BinaryTree {
+public class BinarySearchTree {
 	public static void main(String[] args) {
 		Tree t = new Tree();
 		Scanner stdIn = new Scanner(System.in);
