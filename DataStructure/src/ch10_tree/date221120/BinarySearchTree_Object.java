@@ -1,4 +1,5 @@
 package ch10_tree.date221120;
+
 import java.util.Scanner;
 
 class Student {
@@ -98,36 +99,114 @@ class Tree3 {
 		TreeNode3 newNode = new TreeNode3(input);
 //구현해야 한다 
 		// 최초 노드 삽입
+		if (root == null) {
+			root = newNode;
+			System.out.println("insert: " + input);
+		}
 		// crntNode가 null 아닌동안 반복
-			// x와 crntNode 비교
-			// <0 => left 주목
+		while (crntNode != null) {
+			// input과 crntNode 비교
+			if (input.no == crntNode.data.no) {
+				return false;
+			}
+			// '<' => left 주목
+			else if (input.no < crntNode.data.no) {
 				// left null이면 newNode 삽입
-				// left 존재하면 left를 루트로 반복
-			// >0 => right 주목
+				if (crntNode.LeftChild == null) {
+					crntNode.LeftChild =newNode;
+				} else {
+					// left 존재하면 left를 루트로 반복
+					crntNode = crntNode.LeftChild;
+				}
+			}
+			// '>' => right 주목
+			else if (input.no > crntNode.data.no) {
 				// right null이면 newNode 삽입
-				// right 존재하면 right를 루트로 반복 
+				if (crntNode.RightChild == null) {
+					crntNode.RightChild = newNode;
+				} else {
+					// right 존재하면 right를 루트로 반복 
+					crntNode = crntNode.RightChild;
+				}
+			}
+		}
 		return true;
 	}
 
 	boolean Delete(Integer x) {// binary search tree에서 x가 있으면 삭제하는 구현
 //구현해야 한다 
 		// x를 data로 갖는 노드 선언
-			// 트리 내 존재여부 확인
-				// del 처리 시 부모노드 확인 위해 keep
-				// x가 작으면 왼쪽 탐색
-					// x가 크면 오른쪽 탐색
-			// 찾는 data 없으면 false 반환
-			// 단말노드인 경우
-			// 자식노드 하나인 경우
-				// delNode가 부모의 왼쪽일 때
-				// delNode가 부모의 오른쪽일 때
-			// 자식노드 둘인 경우
-				// 교체용 노드 선언(삭제할 노드의 오른쪽 자식노드 > 가장 작은 값 필요)
-				// 교체용 노드 트리 중 가장 작은 값 찾기
-				// 삭제 노드 위치에 교체용 노드 넣어주기
-				// 교체용 노드가 부모의 왼쪽에 있으면
-					// 교체용 노드의 오른쪽 트리를 부모노드 왼쪽으로 연결
-				// 아니면 교체용 노드의 오른쪽 트리를 부모노드 오른쪽으로 연결
+		TreeNode3 delNode = root;
+		TreeNode3 delParentNode = null;
+		// 트리 내 존재여부 확인
+		while (delNode != null && delNode.data.no != x) {
+			// del 처리 시 부모노드 확인 위해 keep
+			delParentNode = delNode;
+			// x가 작으면 왼쪽 탐색
+			if (x < delNode.data.no) {
+				delNode = delNode.LeftChild;
+			}
+			// x가 크면 오른쪽 탐색
+			else if ( x > delNode.data.no) {
+				delNode = delNode.RightChild;
+			}
+		}
+		// 찾는 data 없으면 false 반환
+		if(delNode == null) {
+			return false;
+		}
+		// 단말노드인 경우
+		if(delNode.LeftChild == null && delNode.RightChild==null) {
+			// delNode가 부모의 왼쪽 노드면 왼쪽 노드 제거
+			if (delParentNode.LeftChild == delNode) {
+				delParentNode.LeftChild = null;
+			} 
+			// 아니면 오른쪽 노드 제거
+			else {
+				delParentNode.RightChild = null;
+			}
+		}
+		// 자식노드 하나인 경우
+		else if(delNode.LeftChild == null || delNode.RightChild == null) {
+			// delNode가 부모의 왼쪽이면 부모 왼쪽에 자식 붙여주기
+			if (delParentNode.LeftChild == delNode) {
+				if(delNode.LeftChild != null) {
+					delParentNode.LeftChild = delNode.LeftChild;
+				} else {
+					delParentNode.LeftChild = delNode.RightChild;
+				}
+			}
+			// 아니면 부모 오른쪽에 자식 붙여주기
+			else {
+				if(delNode.LeftChild != null) {
+					delParentNode.RightChild = delNode.LeftChild;
+				} else {
+					delParentNode.RightChild = delNode.RightChild;
+				}
+			}
+		}
+		// 자식노드 둘인 경우
+		else {
+			// 교체용 노드 선언(삭제할 노드의 오른쪽 자식노드 > 가장 작은 값 필요)
+			TreeNode3 replaceNode = delNode.RightChild;
+			TreeNode3 replaceParentNode = delNode;
+			// 교체용 노드 트리 중 가장 작은 값 찾기
+			while(replaceNode.LeftChild != null) {
+				replaceParentNode = replaceNode;
+				replaceNode = replaceNode.LeftChild;
+			}
+			// 삭제 노드 위치에 교체용 노드 넣어주기
+			delNode.data = replaceNode.data;
+			// 교체용 노드가 부모의 왼쪽에 있으면
+			if (replaceParentNode.LeftChild == replaceNode) {
+				// 교체용 노드의 오른쪽 트리를 부모노드 왼쪽으로 연결
+				replaceParentNode.LeftChild = replaceNode.RightChild;
+			}
+			// 아니면 교체용 노드의 오른쪽 트리를 부모노드 오른쪽으로 연결
+			else {
+				replaceParentNode.RightChild = replaceNode.RightChild;
+			}
+		}
 		return true;
 	}
 }
@@ -135,28 +214,32 @@ class Tree3 {
 public class BinarySearchTree_Object {
 	public static void main(String[] args) {
 		Tree3 t = new Tree3();
-		Scanner stdIn = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		int select = 0;
 		while (select != 6) {
-			System.out.println(1);
+			System.out.println();
 			System.out.println(
 					"BinarySearchTree. Select 1:Insert, 2. Delete, 3:preorder, 4:postorder, 5. inorder, 6. Quit =>");
 
-			select = stdIn.nextInt();
+			select = sc.nextInt();
 			switch (select) {
 			case 1:
-				System.out.println("The number of items = ");
-
-				int nx = stdIn.nextInt();
-				Student[] input = new Student[20];
-				for (int ix = 0; ix < 4; ix++) {
-					Integer snum = stdIn.nextInt();
-					String sname = stdIn.next();
+				System.out.print("The number of items = ");
+				int nx = sc.nextInt();
+				
+				Student[] input = new Student[nx];
+				for (int ix = 0; ix < nx; ix++) {
+					System.out.print("insert num, name = ");
+					Integer snum = sc.nextInt();
+					String sname = sc.next();
 					//추가 코딩
+					input[ix]= new Student(snum, sname);
 				}
 				for (int i = 0; i < nx; i++) {
+					System.out.println("input[i]: " + input[i]);
+					System.out.println("t.Insert(input[i]): "+ t.Insert(input[i]));
 					if ((t.Insert(input[i])) == false)
-						System.out.println("Insert Duplicated data: " + input[i]);
+						System.out.println("Insert Duplicated data");
 				}
 				break;
 			case 2:
@@ -182,5 +265,6 @@ public class BinarySearchTree_Object {
 				break;
 			}
 		}
+		sc.close();
 	}
 }
